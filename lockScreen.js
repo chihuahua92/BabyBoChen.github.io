@@ -29,7 +29,7 @@ function changeDate(){
 document.addEventListener("DOMContentLoaded", function(){ changeDate(); }, false);
 
 document.getElementById("lockScreenWallpaper2").addEventListener("click", function(){
-    chrome.app.window.create("homeScreen.html", {
+    chrome.app.window.create("index.html", {
         innerBounds: { width: 360, height: 640 },
         resizable: false,
     
