@@ -30,13 +30,14 @@ document.addEventListener("DOMContentLoaded", function(){ changeDate(); }, false
 
 function weatherAPI(){
 	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET','http://api.openweathermap.org/data/2.5/weather?id=7280290&APPID=' + weatherAPIKey);
+	ourRequest.open('GET','http://api.openweathermap.org/data/2.5/weather?id=7280290&APPID=' + weatherAPIKey + '&units=metric');
 	var ourData;
 	ourRequest.onload = function() {
 		ourData = JSON.parse(ourRequest.responseText);
 		var weatherDescription = document.getElementById("weatherDescription");
 		var weatherIcon = document.getElementById("weatherIcon");
-		weatherDescription.innerHTML = (ourData.main.temp - 273.15) + "°C";
+		var currentTemp = ourData.main.temp;
+		weatherDescription.innerHTML = currentTemp + "°C";
 		weatherIcon.src = ("weather-icons-master/weatherIcons/" + ourData.weather[0].main + ".gif");
 	}
 	ourRequest.send();
