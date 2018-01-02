@@ -67,17 +67,11 @@ img#upBarIcons{
 
 p#time{
     float:right;
-<<<<<<< HEAD
     display:block;
     margin:9px 10px 0px 0px;
     font-size:18px;
-=======
-    
-    margin:0px 10px 0px 0px;
-    font-size:20px;
->>>>>>> a40336948c58343dbf129856dce7f31f42303376
     color:white;
-    font-family: Arial, Helvetica, sans-serif;    
+	font-family: Arial, Helvetica, sans-serif;    
 }
 
 div#iconArea{
@@ -145,8 +139,8 @@ img#homeKey{
 }
 
 div#lockScreenClockArea{
-	display:inline-block;
 	width:100%;
+	position:relative;
 }
 
 div#lockScreenDateArea{
@@ -154,18 +148,16 @@ div#lockScreenDateArea{
 }
 
 .lockScreenClock{
-    float:left;
-    display:block;
-    margin:70px 10px 0px 15px;
-    font-size:100px;
+    display:inline-block;
+    margin:70px 10px 0px 5px;
+    font-size:90px;
     color:white;
 	text-shadow: 1px 1px #000000;
 	font-family: Arial, Helvetica, sans-serif;     
 }
 
 .lockScreenDate{
-    float:left;
-	display:block;
+	display:inline-block;
 	margin:-15px 0px 0px 20px;
 	font-size:20px;
     color:white;
@@ -178,5 +170,17 @@ webview#wv1{
 	height:93%;
 
 }
+
+div#test{
+	display:inline-block;
+	text-align:center;
+
+}
+
+img#testicon{
+	width:50px;
+
+}
+
 
 
