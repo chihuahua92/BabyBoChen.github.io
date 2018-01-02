@@ -67,11 +67,17 @@ img#upBarIcons{
 
 p#time{
     float:right;
+<<<<<<< HEAD
     display:block;
     margin:9px 10px 0px 0px;
     font-size:18px;
+=======
+    
+    margin:0px 10px 0px 0px;
+    font-size:20px;
+>>>>>>> a40336948c58343dbf129856dce7f31f42303376
     color:white;
-	font-family: Arial, Helvetica, sans-serif;    
+    font-family: Arial, Helvetica, sans-serif;    
 }
 
 div#iconArea{
