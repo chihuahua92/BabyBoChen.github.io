@@ -1,0 +1,12 @@
+$(function(){
+	$("#app1").click(function(){
+		$("#lockScreenWallpaper").slideDown("slow");
+	});
+});
+
+
+$(function(){
+	$("#lockScreenWallpaper").click(function(){
+		$("#lockScreenWallpaper").slideUp("slow");
+	});
+});
