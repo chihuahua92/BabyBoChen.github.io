@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function(){ changeDate(); }, false
 
 function weatherAPI(){
 	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET','http://api.openweathermap.org/data/2.5/weather?id=7280290&APPID=' + weatherAPIKey + '&units=metric');
+	ourRequest.open('GET','https://api.openweathermap.org/data/2.5/weather?id=7280290&APPID=' + weatherAPIKey + '&units=metric');
 	var ourData;
 	ourRequest.onload = function() {
 		ourData = JSON.parse(ourRequest.responseText);
