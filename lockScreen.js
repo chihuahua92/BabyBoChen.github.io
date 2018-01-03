@@ -38,7 +38,7 @@ function weatherAPI(){
 		var weatherIcon = document.getElementById("weatherIcon");
 		var currentTemp = ourData.main.temp;
 		weatherDescription.innerHTML = currentTemp + "°C";
-		weatherIcon.src = ("weatherIcons/" + "Clouds" + ".gif");
+		weatherIcon.src = ("weatherIcons/" + ourData.weather[0].main + ".gif");
 	}
 	ourRequest.send();
 	setTimeout(function() {weatherAPI()},1800000)
