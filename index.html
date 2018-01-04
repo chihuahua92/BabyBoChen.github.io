@@ -2,23 +2,13 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<link rel="stylesheet" type="text/css" href="style.css"/>
+<link rel="icon" href="伯夷app.png">
+<link rel="stylesheet" type="text/css" href="homeScreenStyle.css"/>
+<title>BabyBoChen</title>
 </head>
 <body>
 <div id="wrapper">
     <div id="homeScreenWallpaper">
-		<div id="lockScreenWallpaper">
-			<div id="lockScreenClockArea">
-				<p id="clock" class="lockScreenClock">XX:XX</p>
-				<div id="weather">
-					<img id="weatherIcon" src="weatherIcons/Rain.gif">
-					<p id="weatherDescription">17°C</p>
-				</div>				
-			</div>
-			<div id="lockScreenDateArea">
-				<p id="lockScreenDate" class="lockScreenDate">XXXX</p>
-			</div>
-		</div><!end of lockScreenWallpaper>
         <div id="upScreenMenu">
 			<div id="upScreenMenuBackground"></div>
 			<div id="upScreenMenuWrapper">
@@ -41,7 +31,9 @@
 				<p id="icon1Name" class="iconName">Chrome</p>
 			</div><!end of icon2>
 			<div id="icon1" class="iconWrapper">
+				<a href="lockScreen.html">
 				<img id="app1" src="screenOff.png" class="icon">
+				</a>
 				<p id="icon1Name" class="iconName">Screen Off</p>
 			</div><!end of icon1>
 			<div id="icon3" class="iconWrapper">
@@ -65,8 +57,6 @@
 </div><!end of wrapper>
 </body>
 <script src="jquery-3.2.1.js"></script>
-<script src="config.js"></script>
-<script src="lockScreen.js"></script>
 <script src="screenOff.js"></script>
 <script src="homeKey.js"></script>
 <script src="homeScreen.js"></script>
