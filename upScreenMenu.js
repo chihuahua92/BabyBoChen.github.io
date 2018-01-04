@@ -27,6 +27,6 @@ function changeDate2(){
 	var currentYear = String(currentTime.getFullYear());
     var dateDisplay = currentDay.concat(",", " ", currentMonth, " ", currentDate, ", ", currentYear)
     document.getElementById("upScreenMenuDate").innerHTML = dateDisplay;
-    setTimeout(function() {changeDate()},1000)
+    setTimeout(function() {changeDate2()},1000)
 }
 document.addEventListener("DOMContentLoaded", function(){ changeDate2(); }, false);
