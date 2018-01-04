@@ -1,0 +1,91 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    border:0px;
+}
+
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    margin: 0px;
+    padding:0px;
+}
+
+body {
+    margin:0px;
+    padding:0px;
+}
+
+div#wrapper {
+    height: 640px;
+    width: 360px;
+}
+
+div#lockScreenWallpaper {
+    height:100%;
+    width:100%;
+	display:none;
+    background-image: url("lockScreen.png");
+    background-size:100% 100%;
+}
+
+div#lockScreenBackground {
+    height: 640px;
+    width: 360px;
+    position:absolute;
+	z-index:-1;
+    background-image: url("homeScreen.png");
+    background-size:100% 100%;
+}
+
+div#lockScreenClockArea{
+	width:100%;
+	position:relative;
+}
+
+div#lockScreenDateArea{
+	width:100%;
+}
+
+.lockScreenClock{
+    display:inline-block;
+    margin:70px 10px 0px 5px;
+    font-size:90px;
+    color:white;
+	text-shadow: 1px 1px #000000;
+	font-family: Arial, Helvetica, sans-serif;     
+}
+
+.lockScreenDate{
+	display:inline-block;
+	margin:-15px 0px 0px 20px;
+	font-size:20px;
+    color:white;
+	text-shadow: 1px 1px #000000;
+	font-family: Arial, Helvetica, sans-serif;   
+}
+
+div#weather{
+	display:inline-block;
+	text-align:center;
+
+}
+
+img#weatherIcon{
+	width:50px;
+	margin:0px 0px -10px 0px;
+}
+
+p#weatherDescription{
+	font-size:18px;
+    color:white;
+	text-shadow: 1px 1px #000000;
+	font-family: Arial, Helvetica, sans-serif; 
+}
+
+.clear{
+    clear:both;
+}
