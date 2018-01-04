@@ -47,13 +47,21 @@ function weatherAPI(){
 document.addEventListener("DOMContentLoaded", function(){ weatherAPI(); }, false);
 
 
-document.getElementById("lockScreenWallpaper2").addEventListener("click", function(){
-    chrome.app.window.create("index.html", {
-        innerBounds: { width: 360, height: 640 },
-        resizable: false,
-    
+$(function(){
+	$("#lockScreenWallpaper").fadeIn("slow");
+});
 
+$(function(){
+	$("#lockScreenWallpaper").click(function(){
+		$("#lockScreenWallpaper").fadeOut("slow");
+	});
+});
+
+
+document.getElementById("lockScreenWallpaper").addEventListener("click", function(){
+    chrome.app.window.create("index.html", {
+        frame: "none",
+		innerBounds: { width: 360, height: 640 },
+        resizable: false,
 },close);
 })
-
-
