@@ -1,29 +1,32 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<link rel="stylesheet" type="text/css" href="style.css"/>
+<link rel="icon" href="伯夷app.png">
+<link rel="stylesheet" type="text/css" href="lockScreenStyle.css"/>
+<title>BabyBoChen</title>
 </head>
 <body>
 <div id="wrapper">
-	
-	<a href="homeScreen.html">
-    <div id="lockScreenWallpaper2">
-		<div id="upBar">
-			
-			<div style="clear"></div>
-		</div>
+	<div id="lockScreenBackground">
+	</div>
+	<a href="index.html">
+	<div id="lockScreenWallpaper">
 		<div id="lockScreenClockArea">
-				<p id="clock" class="lockScreenClock">XX:XX</p>
-				<div style="clear"></div>
+			<p id="clock" class="lockScreenClock">XX:XX</p>
+			<div id="weather">
+				<img id="weatherIcon" src="">
+				<p id="weatherDescription">XXXX</p>
+			</div>				
 		</div>
 		<div id="lockScreenDateArea">
 			<p id="lockScreenDate" class="lockScreenDate">XXXX</p>
 		</div>
-    </div>
+	</div><!end of lockScreenWallpaper>
 	</a>
-	
+
 </div>
 </body>
 <script src="jquery-3.2.1.js"></script>
 <script src="lockScreen.js"></script>
+<script src="config.js"></script>
 </html>
