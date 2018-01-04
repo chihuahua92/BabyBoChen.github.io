@@ -1,12 +1,12 @@
-var currentTime = new Date();
 
 function changeClock(){
-    var H;
+    var currentTime = new Date();
+	var H;
     var M;    
     var currentHours = currentTime.getHours();
     if (currentHours < 10) { H = ("0" + String(currentHours))}
     else { H = String(currentHours)}
-    var currentMinutes = String(currentTime.getMinutes());
+    var currentMinutes = currentTime.getMinutes();
     if (currentMinutes < 10) { M = ("0" + String(currentMinutes))}
     else { M = String(currentMinutes)}
     var timeDisplay = H.concat(":",M)
@@ -16,6 +16,7 @@ function changeClock(){
 document.addEventListener("DOMContentLoaded", function(){ changeClock(); }, false);
 
 function changeDate(){
+	var currentTime = new Date();
 	var day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	var month = ["Jan", "Feb", "Mar", "Apl", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var date;    
@@ -37,7 +38,7 @@ function weatherAPI(){
 		var weatherDescription = document.getElementById("weatherDescription");
 		var weatherIcon = document.getElementById("weatherIcon");
 		var currentTemp = ourData.main.temp;
-		weatherDescription.innerHTML = currentTemp + "°C";
+		weatherDescription.innerHTML = Math.floor(currentTemp) + "°C";
 		weatherIcon.src = ("weatherIcons/" + ourData.weather[0].main + ".gif");
 	}
 	ourRequest.send();
