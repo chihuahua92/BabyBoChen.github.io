@@ -53,7 +53,7 @@ $.getJSON(NYforecast).done(function(data) {
 
 function draw(){
 	var APPID = $("#APIKey").val();
-	var inputAPI = "http://api.openweathermap.org/data/2.5/forecast?id=7280290&APPID=" + APPID + "&units=metric";
+	var inputAPI = "https://api.openweathermap.org/data/2.5/forecast?id=7280290&APPID=" + APPID + "&units=metric";
 	$("#div1").hide("fast");
 	$("#div2").show("fast");
 	$.getJSON(inputAPI).done(function(data) {
