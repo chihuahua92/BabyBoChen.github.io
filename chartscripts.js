@@ -30,12 +30,11 @@ $.getJSON(NYforecast).done(function(data) {
 				}]
 		},
 		options: {
+			responsive: false,
 			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero:true
-					}
-				}]
+				xAxes: [{ticks: {autoSkip:false}}],
+				yAxes: [{ticks: {beginAtZero:true}}]
+				
 			}
 		}
 	});
@@ -45,18 +44,12 @@ $.getJSON(NYforecast).done(function(data) {
 	}	
 });	
 
-
-
-
-
-
-
 function draw(){
 	var APPID = $("#APIKey").val();
 	var inputAPI = "https://api.openweathermap.org/data/2.5/forecast?id=7280290&APPID=" + APPID + "&units=metric";
 	$("#div1").hide("fast");
 	$("#div2").show("fast");
-	$.getJSON(inputAPI).done(function(data) {
+	$.getJSON(forecast).done(function(data) {
 		var date = new Date();
 		var tempData = [];
 		var dateNHour = [];
@@ -80,12 +73,10 @@ function draw(){
 					}]
 			},
 			options: {
+				responsive: false,
 				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero:true
-						}
-					}]
+					xAxes: [{ticks: {autoSkip:false}}],
+					yAxes: [{ticks: {beginAtZero:true}}]
 				}
 			}
 		});

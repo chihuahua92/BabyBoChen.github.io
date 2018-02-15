@@ -1,5 +1,5 @@
 div#div1{
-	height:275px;
+	height:500px;
 	width:500px;
 }
 
@@ -13,6 +13,15 @@ input#APIKey{
 	margin:10px;
 	border: 1px solid red;
 }
+
+canvas#canvas1{
+	width:300px;	
+}
+
+canvas#canvas2{
+	width:300px;	
+}
+
 
 
 
