@@ -29,8 +29,10 @@ document.getElementById("app2").addEventListener("click", function(){
 })
 
 
+/*
 document.getElementById("app3").addEventListener("click", function(){
 	window.open("https://youtube.com/");
 })
+*/
 
 
