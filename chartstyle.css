@@ -1,3 +1,4 @@
+
 div#div1{
 	height:500px;
 	width:500px;
@@ -14,13 +15,8 @@ input#APIKey{
 	border: 1px solid red;
 }
 
-canvas#canvas1{
-	width:300px;	
-}
 
-canvas#canvas2{
-	width:300px;	
-}
+
 
 
 

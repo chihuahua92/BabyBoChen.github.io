@@ -10,7 +10,7 @@ $.getJSON(NYforecast).done(function(data) {
 	var date = new Date();
 	var tempData = [];
 	var dateNHour = [];
-	for ( i = 1; i < data.list.length; i = i+8){
+	for ( i = 0; i < 5; i = i+1){
 		date.setTime(data.list[i].dt * 1000);
 		var dateString = String(date.getMonth() + 1) + "/" + String(date.getDate()) + " " + String(date.getHours()) + ":" + "00";
 		dateNHour.push(dateString);
@@ -49,11 +49,11 @@ function draw(){
 	var inputAPI = "https://api.openweathermap.org/data/2.5/forecast?id=7280290&APPID=" + APPID + "&units=metric";
 	$("#div1").hide("fast");
 	$("#div2").show("fast");
-	$.getJSON(forecast).done(function(data) {
+	$.getJSON(inputAPI).done(function(data) {
 		var date = new Date();
 		var tempData = [];
 		var dateNHour = [];
-		for ( i = 1; i < data.list.length; i = i+8){
+		for ( i = 0; i < 5; i = i+1){
 			date.setTime(data.list[i].dt * 1000);
 			var dateString = String(date.getMonth() + 1) + "/" + String(date.getDate()) + " " + String(date.getHours()) + ":" + "00";
 			dateNHour.push(dateString);
