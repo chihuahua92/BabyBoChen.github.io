@@ -23,11 +23,11 @@ document.getElementById("app1").addEventListener("click", function(){
 },close);
 })
 
-
+/*
 document.getElementById("app2").addEventListener("click", function(){
 	window.open("https://google.com/");
 })
-
+*/
 
 /*
 document.getElementById("app3").addEventListener("click", function(){
