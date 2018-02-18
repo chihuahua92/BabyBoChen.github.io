@@ -1,15 +1,22 @@
-div#div1{
-	margin:0px;
-	padding:0px;
-	border:0px;
-	text-align:center;
+div#wallPaper{
+	width:100vw;
+	height:177vw;
+	background-size:100%;
+	background-repeat: no-repeat;
+	background-image: url("homeScreen.png");
+}
+
+img#pic1{
+}
+
+div#app1Div{
+
 }
 
 div#div2{
 	margin:0px;
 	padding:0px;
 	border:0px;
-	text-align:center;
 }
 
 img#homeKey{
