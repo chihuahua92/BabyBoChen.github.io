@@ -4,6 +4,11 @@ body{
 	padding:0px;
 	margin:0px;
 }
+div#div1{
+	margin:5px;
+	padding:5px;
+}
+
 
 div#div2{
 	width:100vw;
@@ -56,6 +61,10 @@ div#curve_chart{
 	height:100%;
 }
 
+div#div1{
+	margin:5px;
+	padding:5px;
+}
 
 div#div2{
 	vertical-align: top;
