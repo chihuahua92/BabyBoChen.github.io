@@ -122,9 +122,9 @@ function matchAPI(){
 
 chart1();
 
-$(window).resize(function(){
+/*$(window).resize(function(){
 	matchAPI();	
-});
+});*/
 
 $("#submitBtn").click(chart2);
 $("#submitBtn").click(function(){
