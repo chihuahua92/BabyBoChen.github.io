@@ -1,0 +1,52 @@
+*{
+	border:0px;
+	margin:0px;
+	padding:0px;
+}
+
+body{
+	background-color: green;
+}
+
+
+.cards{
+	width:20vw;
+	border:0px;
+	margin:0px;
+	padding:0px;
+}
+
+.myDeckCards{
+	width:20vw;
+	border:0px;
+	margin:0px;
+	padding:0px;
+}
+
+#div1{
+	border:0px;
+	margin:0px;
+	padding:0px;
+	width:20vw;
+	height:95vh;
+	float:left;
+
+}
+#div2{
+	width:60vw;
+	height:95vh;
+	float:left;
+	text-align:center;
+}
+
+#div3{
+	clear:both;
+	width:20vw;
+	text-align:center;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#cardNum{
+	font-size: 5vw;
+}
