@@ -38,7 +38,7 @@ body{
 
 }
 #div2{
-	width:60vw;
+	width:50vw;
 	height:95vh;
 	float:left;
 	text-align:center;
@@ -55,6 +55,16 @@ body{
 	height:50vh;
 }
 
+#div5{
+	float:left;
+	width:23vw;
+	height:95vh;
+}
+
 #cardNum{
 	font-size: 5vw;
+}
+
+.readMe{
+	font-size: 18px;
 }
