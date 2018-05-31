@@ -23,6 +23,13 @@ body{
 	padding:0px;
 }
 
+.opponentCards{
+	width:20vw;
+	border:0px;
+	margin:0px;
+	padding:0px;
+}
+
 .poolCards{
 	height:10vw;
 	
@@ -38,7 +45,8 @@ body{
 
 }
 #div2{
-	width:50vw;
+	position: relative;
+	width:48vw;
 	height:95vh;
 	float:left;
 	text-align:center;
@@ -52,13 +60,66 @@ body{
 }
 
 #div4{
-	height:50vh;
+	height:36vw;
 }
 
 #div5{
-	float:left;
-	width:23vw;
+	float:right;
+	width:20vw;
 	height:95vh;
+}
+
+#div6{
+	clear:both;	
+	position: absolute;
+	left:0;
+	top:0;
+	width:100vw;
+	height:100vh;
+	background-color:rgba(0,0,0,0.5);
+	z-index: 1;
+	display: none;
+}
+
+#div7{
+	width:60vw;
+	height:50vh;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25vh;
+	margin-bottom: 25vh;
+	background-color: fuchsia;
+	text-align: center;
+	font-size: 3vw;
+}
+
+#div8{
+	width:60vw;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	
+}
+
+.callingRank{
+	width:12vw;
+	max-height: 20vh;
+	margin-left: 1.5vw;
+	margin-right: 1.5vw;
+	border:2vw;
+}
+
+#div9{
+	width:40vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+button{
+	margin:1vw;
+	border:1vw;
+	padding:1vw;
+	font-size: 3vw;
 }
 
 #cardNum{
@@ -67,4 +128,31 @@ body{
 
 .readMe{
 	font-size: 2.5vw;
+}
+
+#div11{
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color:rgba(0,0,0,0.5);;
+}
+
+#div10{
+	width:30vw;
+	height:20vh;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25vh;
+	margin-bottom: 25vh;
+	background-color: fuchsia;
+	text-align: center;
+}
+
+#confirm{
+	margin-top: 10vh;
+}
+
+#redo{
+	margin-top: 10vh;
 }
