@@ -1,6 +1,6 @@
 
 $(window).on('resize',function(){
-    var myCards = document.getElementById("div1")
+    var myCards = document.getElementById("div1");
     for (i=0;i<myCards.childElementCount;i++){
         var selectedCards = myCards.children[i];
         var jqueryObject = $(myCards.children[i]);
