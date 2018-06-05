@@ -36,7 +36,7 @@ var cardSet = {
 var pileCards = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 
 /*左邊玩家的牌*/
-const myCards = document.getElementById("div1").childNodes;
+var myCards = document.getElementById("div1").childNodes;
 
 /*左邊玩家可以叫的數字,用examCards()來判斷myRank裡該有的項目*/
 var myRank = [];
@@ -214,12 +214,16 @@ $("#div6").on("click",function(e){
 $("#makeCallBt").on('click',function(){
 	if(nowCalling!=undefined){
 		for(i=0;i<selectedCards.length;i++){
+            console.log(selectedCards.length);
 			var placingCard = document.createElement("img");
 			placingCard.src = "asset/cardBackground.png";
 			placingCard.id = selectedCards[i].id;
             placingCard.className = "poolCards";
             placingCard.dataset.rank = selectedCards[i].dataset.rank;
             placingCard.dataset.isCover = 1;
+            if(placingCard.dataset.rank==nowCalling){
+                lie = 1;
+            }
             if(placingCard.dataset.rank!=nowCalling){
                 lie = lie * 0;
             }
@@ -231,27 +235,30 @@ $("#makeCallBt").on('click',function(){
 		selectedCards.remove();
         $("#div6").css("display","none");
         $("#div11").css("display","block");
-
-        $("#redo").on('click',function(){
-            $(placingCard).each(function(){
-                var resumeCard = document.createElement("img");
-                resumeCard.className = "myDeckCards";
-                resumeCard.src = "asset/" + placingCard.id + ".png";
-                resumeCard.id = placingCard.id;
-                resumeCard.dataset.selected = 1;
-                resumeCard.dataset.originalOffsetLeft = resumeCard.offsetLeft;
-                resumeCard.dataset.rank = placingCard.dataset.rank;
-                var myDeck = $("#div1");
-                myDeck.append(resumeCard);
-            })
-            placingCard.remove();
-            $("#div11").css("display","none");
-        })
-
 	}
 })
-
-
+/*按Make Call之後可以選擇confirm或redo*/
+$("#redo").on('click',function(){
+	var cardPool = document.getElementById("div4").childNodes;
+	console.log(cardPool.length);
+	for(i=0;i<cardPool.length;i++){
+		var resumeCard = document.createElement("img");
+		resumeCard.className = "myDeckCards";
+		resumeCard.src = "asset/" + cardPool[i].id + ".png";
+		resumeCard.id = cardPool[i].id;
+		resumeCard.dataset.selected = 1;
+		resumeCard.dataset.originalOffsetLeft = resumeCard.offsetLeft;
+        resumeCard.dataset.rank = cardPool[i].dataset.rank;
+        addEventListenerToMyCards(resumeCard);
+		var myDeck = $("#div1");
+        myDeck.append(resumeCard);
+	}
+	var div4 = document.getElementById("div4");
+	while(div4.firstChild){
+		div4.removeChild(div4.firstChild);
+	}
+	$("#div11").css("display","none");
+})
 
 
 
