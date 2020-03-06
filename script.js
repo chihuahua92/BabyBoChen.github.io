@@ -106,25 +106,25 @@ class BouncingObject extends Image{
 
 }
 
-var card = new BouncingObject(ctx,"kingOfClub.png",333,186);
-card.id = 1;
-card.setStartPos(0,0);
-card.draw();
+var ks = new BouncingObject(ctx,"kingOfSpade.png",333,186);
+ks.id = "ks";
+ks.setStartPos(0,0);
+ks.draw();
 
-var card2 = new BouncingObject(ctx,"kingOfClub.png",333,186);
-card2.id = 2;
-card2.setStartPos(0,window.innerHeight-card2.height);
-card2.draw();
+var kh = new BouncingObject(ctx,"kingOfHeart.png",333,186);
+kh.id = "kh";
+kh.setStartPos(0,window.innerHeight-kh.height);
+kh.draw();
 
-var card3 = new BouncingObject(ctx,"kingOfClub.png",333,186);
-card3.id = 3;
-card3.setStartPos(window.innerWidth-card3.width,0);
-card3.draw();
+var kd = new BouncingObject(ctx,"kingOfDiamond.png",333,186);
+kd.id = "kd";
+kd.setStartPos(window.innerWidth-kd.width,0);
+kd.draw();
 
-var card4 = new BouncingObject(ctx,"kingOfClub.png",333,186);
-card4.id = 4;
-card4.setStartPos(window.innerWidth-card4.width,window.innerHeight-card4.height);
-card4.draw();
+var kc = new BouncingObject(ctx,"kingOfClub.png",333,186);
+kc.id = "kc";
+kc.setStartPos(window.innerWidth-kc.width,window.innerHeight-kc.height);
+kc.draw();
 
 document.addEventListener("mousedown",function(event){
 	var len = canvasObj.length;
