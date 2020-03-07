@@ -57,15 +57,21 @@ class BouncingObject extends Image{
 		this._y = y;
 	}
 
-	setSpeed(speed){
-		if (speed > 10){
-			speed = 10;
+	setSpeed(xSpeed,ySpeed){
+        if (xSpeed > 10){
+			xSpeed = 10;
 		}
-		else if (speed < 0){
-			speed = 0;
+		else if (xSpeed < -10){
+			xSpeed = -10;
 		}
-		this.vectorX = speed;
-		this.vectorY = speed;
+		if (ySpeed > 10){
+			ySpeed = 10;
+		}
+		else if (ySpeed < -10){
+			ySpeed = -10;
+		}
+		this.vectorX = xSpeed;
+		this.vectorY = ySpeed;
 	}
 
 	draw(){
@@ -140,29 +146,32 @@ var clock = new Clock();
 
 var widthLimit = window.innerWidth-333;
 var heightLimit = window.innerHeight-186;
-
+function getRandom(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;
+};
 
 var ks = new BouncingObject(ctx,"kingOfSpade.png",13,"s",333,186);
 ks.id = "ks";
-ks.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
-ks.setSpeed(4);
+ks.setStartPos(getRandom(0,widthLimit),getRandom(0,heightLimit));
+ks.setSpeed(getRandom(-5,5),getRandom(-5,5));
 ks.draw();
 
 var kh = new BouncingObject(ctx,"kingOfHeart.png",13,"h",333,186);
 kh.id = "kh";
-kh.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
-kh.setSpeed(3);
+kh.setStartPos(getRandom(0,widthLimit),getRandom(0,heightLimit));
+kh.setSpeed(getRandom(-5,5),getRandom(-5,5));
 kh.draw();
 
 var kd = new BouncingObject(ctx,"kingOfDiamond.png",13,"d",333,186);
 kd.id = "kd";
-kd.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
-kd.setSpeed(2);
+kd.setStartPos(getRandom(0,widthLimit),getRandom(0,heightLimit));
+kd.setSpeed(getRandom(-5,5),getRandom(-5,5));
 kd.draw();
 
 var kc = new BouncingObject(ctx,"kingOfClub.png",13,"c",333,186);
 kc.id = "kc";
-kc.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
+kc.setStartPos(getRandom(0,widthLimit),getRandom(0,heightLimit));
+kd.setSpeed(getRandom(-5,5),getRandom(-5,5));
 kc.draw();
 
 document.addEventListener("click",function(event){
@@ -223,6 +232,8 @@ document.addEventListener("click",function(event){
 
 var refreshEvent = new CustomEvent("refresh",null);
 
+var mainloop = setInterval(refresh,1000/30);
+
 function refresh(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if (layer.length == 0){
@@ -235,5 +246,3 @@ function refresh(){
         element.dispatchEvent(refreshEvent);
     });
 }
-
-var mainloop = setInterval(refresh,1000/30);
