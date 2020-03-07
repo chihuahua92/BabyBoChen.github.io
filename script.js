@@ -138,27 +138,31 @@ class Clock {
 
 var clock = new Clock();
 
+var widthLimit = window.innerWidth-333;
+var heightLimit = window.innerHeight-186;
+
+
 var ks = new BouncingObject(ctx,"kingOfSpade.png",13,"s",333,186);
 ks.id = "ks";
-ks.setStartPos(0,0);
+ks.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
 ks.setSpeed(4);
 ks.draw();
 
 var kh = new BouncingObject(ctx,"kingOfHeart.png",13,"h",333,186);
 kh.id = "kh";
-kh.setStartPos(0,window.innerHeight-kh.height);
+kh.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
 kh.setSpeed(3);
 kh.draw();
 
 var kd = new BouncingObject(ctx,"kingOfDiamond.png",13,"d",333,186);
 kd.id = "kd";
-kd.setStartPos(window.innerWidth-kd.width,0);
+kd.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
 kd.setSpeed(2);
 kd.draw();
 
 var kc = new BouncingObject(ctx,"kingOfClub.png",13,"c",333,186);
 kc.id = "kc";
-kc.setStartPos(window.innerWidth-kc.width,window.innerHeight-kc.height);
+kc.setStartPos(Math.floor(Math.random()*10)/10*widthLimit,Math.floor(Math.random()*10)/10*heightLimit);
 kc.draw();
 
 document.addEventListener("click",function(event){
@@ -170,12 +174,25 @@ document.addEventListener("click",function(event){
 			&& event.clientY >= layer[len-i-1].prevY){
             if (layer[len-i-1].dragged == false){
                 if (revealed.length == 2){
-                    revealed[0].dragged = false;
-                    revealed[1].dragged = false;
-                    revealed = [];
+                    if (revealed[0].remove == true && revealed[1].remove == true){
+                        if (layer.includes(revealed[0])){
+                            layer.splice(layer.indexOf(revealed[0]),1);
+                        }
+                        if (layer.includes(revealed[1])){
+                            layer.splice(layer.indexOf(revealed[1]),1);
+                        }
+                        revealed = [];
+                    }else{
+                        revealed[0].dragged = false;
+                        revealed[1].dragged = false;
+                        revealed = [];
+                        layer[len-i-1].dragged = true;
+                        revealed.push(layer[len-i-1]);
+                    }
+                }else{
+                    layer[len-i-1].dragged = true;
+                    revealed.push(layer[len-i-1]);
                 }
-                layer[len-i-1].dragged = true;
-                revealed.push(layer[len-i-1]);
             }
             if (revealed.length == 2){
                 attempt += 1;
@@ -183,9 +200,9 @@ document.addEventListener("click",function(event){
                 if (revealed[0].color == revealed[1].color 
                     && revealed[0].rank == revealed[1].rank){
                     revealed[0].remove = true;
-                    revealed[0].countdown = 60;
+                    revealed[0].countdown = 30;
                     revealed[1].remove = true;
-                    revealed[1].countdown = 60;
+                    revealed[1].countdown = 30;
                     
                 }else{
                     revealed[0].autoSeal = true;
@@ -207,14 +224,16 @@ document.addEventListener("click",function(event){
 var refreshEvent = new CustomEvent("refresh",null);
 
 function refresh(){
-	ctx.clearRect(0,0,canvas.width,canvas.height);
-	var timeDisplay = clock.tick();
-	ctx.font = "20px Georgia";
-	ctx.fillText(timeDisplay,10,20);
-	layer.forEach(/** @type {BouncingObject} */element => {
-		element.dispatchEvent(refreshEvent);
-	});
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if (layer.length == 0){
+        clearInterval(mainloop);
+    }
+    var timeDisplay = clock.tick();
+    ctx.font = "20px Georgia";
+    ctx.fillText(timeDisplay,10,20);
+    layer.forEach(/** @type {BouncingObject} */element => {
+        element.dispatchEvent(refreshEvent);
+    });
 }
 
-setInterval(refresh,1000/30);
-
+var mainloop = setInterval(refresh,1000/30);
