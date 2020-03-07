@@ -1,3 +1,6 @@
+var body = document.querySelector("body");
+
+
 var canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -10,7 +13,7 @@ window.addEventListener('resize',function(event){
 /** @type {CanvasRenderingContext2D} */
 var ctx = canvas.getContext("2d");
 
-var canvasObj = [];
+var layer = [];
 
 class BouncingObject extends Image{
 
@@ -30,7 +33,7 @@ class BouncingObject extends Image{
 		this._y = 0;
 		this.prevX = 0;
 		this.prevY = 0;
-		canvasObj.push(this);
+		layer.push(this);
 		document.addEventListener("mouseup",this.mouseupHandler.bind(this));
 		document.addEventListener("mousemove",this.mousemoveHandler.bind(this));
 		window.addEventListener("resize",this.update.bind(this));
@@ -106,19 +109,49 @@ class BouncingObject extends Image{
 
 }
 
+class Clock {
+	
+	constructor(){
+		this.a = 0;
+		this.b = 0;
+		this.c = Date.now();
+		this.d = 0;
+		this.timecodeMs = 0;
+		this.timecode = new Date(0,0,0,0,0,0,this.timecodeMs);
+	}
+
+	tick(){
+		this.a = Date.now();
+		this.b = this.a - this.c;
+		this.timecodeMs = this.timecodeMs + this.b + this.d;
+		this.timecode = new Date(0,0,0,0,0,0,this.timecodeMs);
+		this.c = Date.now();
+		var timeString = "";
+		for (var i = 0; i < 8; i++){
+			timeString += this.timecode.toTimeString().charAt(i);
+		}
+		return timeString;
+	}
+}
+
+var clock = new Clock();
+
 var ks = new BouncingObject(ctx,"kingOfSpade.png",333,186);
 ks.id = "ks";
 ks.setStartPos(0,0);
+ks.setSpeed(4);
 ks.draw();
 
 var kh = new BouncingObject(ctx,"kingOfHeart.png",333,186);
 kh.id = "kh";
 kh.setStartPos(0,window.innerHeight-kh.height);
+kh.setSpeed(3);
 kh.draw();
 
 var kd = new BouncingObject(ctx,"kingOfDiamond.png",333,186);
 kd.id = "kd";
 kd.setStartPos(window.innerWidth-kd.width,0);
+kd.setSpeed(2);
 kd.draw();
 
 var kc = new BouncingObject(ctx,"kingOfClub.png",333,186);
@@ -127,49 +160,31 @@ kc.setStartPos(window.innerWidth-kc.width,window.innerHeight-kc.height);
 kc.draw();
 
 document.addEventListener("mousedown",function(event){
-	var len = canvasObj.length;
-	for (var i = 0; i < canvasObj.length; i++){
-		if (event.clientX <= canvasObj[len-i-1].prevX + canvasObj[len-i-1].width
-			&& event.clientX >= canvasObj[len-i-1].prevX 
-			&& event.clientY <= canvasObj[len-i-1].prevY + canvasObj[len-i-1].height
-			&& event.clientY >= canvasObj[len-i-1].prevY){
-			canvasObj[len-i-1].dragged = true;
-			canvasObj.push(canvasObj[len-i-1]);
-			canvasObj.splice(len-i-1,1);
+	var len = layer.length;
+	for (var i = 0; i < layer.length; i++){
+		if (event.clientX <= layer[len-i-1].prevX + layer[len-i-1].width
+			&& event.clientX >= layer[len-i-1].prevX 
+			&& event.clientY <= layer[len-i-1].prevY + layer[len-i-1].height
+			&& event.clientY >= layer[len-i-1].prevY){
+			layer[len-i-1].dragged = true;
+			layer.push(layer[len-i-1]);
+			layer.splice(len-i-1,1);
 			break;
 		}
 	}
 });
 
-var a = 0;
-var b = 0;
-var c = Date.now();
-var d = 0;
-var nowMs = 0;
-var nowDate = new Date(0,0,0,0,0,0,0);
-
-setInterval(function(){
-    a = Date.now();
-    b = a - c;
-    nowMs = nowMs + b + d;
-    nowDate = new Date(0,0,0,0,0,0,nowMs);
-    c = Date.now();
-    d = c - a;
-},100);
-
 var refreshEvent = new CustomEvent("refresh",null);
+
 function refresh(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-	var timeString = nowDate.toTimeString();
-	var timeDisplay = "";
-	for (var i = 0; i < 8; i++){
-		timeDisplay += timeString.charAt(i);
-	}
+	var timeDisplay = clock.tick();
 	ctx.font = "20px Georgia";
 	ctx.fillText(timeDisplay,10,20);
-	canvasObj.forEach(/** @type {BouncingObject} */element => {
+	layer.forEach(/** @type {BouncingObject} */element => {
 		element.dispatchEvent(refreshEvent);
 	});
 }
 
 setInterval(refresh,1000/30);
+
