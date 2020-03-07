@@ -14,13 +14,25 @@ window.addEventListener('resize',function(event){
 var ctx = canvas.getContext("2d");
 
 var layer = [];
+var revealed = [];
+var attempt = 0;
 
 class BouncingObject extends Image{
 
-	constructor(ctx,src,width,height){
+	constructor(ctx,card,rank,suit,width,height){
 		super();
-		this.ctx = ctx;
-		this.src = src;
+        this.ctx = ctx;
+        this.card = card;
+        this.rank = rank;
+        this.suit = suit;
+        this.color;
+        if (this.suit == "s" || this.suit  == "c"){
+            this.color = "black";
+        }else if (this.suit == "h" || this.suit == "d"){
+            this.color = "red";
+        }
+        this.seal = "seal.png";
+		this.src = card;
 		this.width = width;
 		this.height = height;
 		this.cursorX;
@@ -32,10 +44,11 @@ class BouncingObject extends Image{
 		this._x = 0;
 		this._y = 0;
 		this.prevX = 0;
-		this.prevY = 0;
+        this.prevY = 0;
+        this.autoSeal = false;
+        this.remove = false;
+        this.countdown = 60;
 		layer.push(this);
-		document.addEventListener("mouseup",this.mouseupHandler.bind(this));
-		document.addEventListener("mousemove",this.mousemoveHandler.bind(this));
 		window.addEventListener("resize",this.update.bind(this));
 	}
 
@@ -62,49 +75,38 @@ class BouncingObject extends Image{
 	}
 
 	update(){
+        if (this.autoSeal == true && this.countdown <= 0){
+            revealed = [];
+            this.autoSeal = false;
+            this.dragged = false;
+        }
+        if (this.remove == true && this.countdown <= 0){
+            revealed = [];
+            if (layer.includes(this)){
+                layer.splice(layer.indexOf(this),1);
+            }
+        }
+        if (this.dragged == true){
+            this.src = this.card;
+            if (this.autoSeal == true || this.remove == true){
+                this.countdown -= 1;
+            }
+        }else{
+            this.src = this.seal;
+        }
 		this.ctx.drawImage(this,this._x,this._y);
 		this.prevX = this._x;
-		this.prevY = this._y;
+        this.prevY = this._y;
 	}
 
 	bouncing(){
-		if (this.dragged == false){
-			this._x = this.prevX + this.vectorX;
-			this._y = this.prevY + this.vectorY;
-			if (this._x + this.width > window.innerWidth){this.vectorX = Math.abs(this.vectorX) * (-1);}
-			else if (this._x < 0 ){this.vectorX = Math.abs(this.vectorX);};
-			if (this._y + this.height > window.innerHeight){this.vectorY = Math.abs(this.vectorY) * (-1);}
-			else if (this._y < 0 ){this.vectorY = Math.abs(this.vectorY);};
-			this.update();
-		}else{
-			this.update();
-		}
-	}
-
-	/* deprecated! */
-	mousedownHandler(/** @type {MouseEvent} */event){
-		if (event.clientX <= this.prevX + this.width && event.clientX >= this.prevX && 
-			event.clientY <= this.prevY + this.height && event.clientY >= this.prevY){
-			this.dragged = true;
-		}
-	}
-
-	mouseupHandler(/** @type {MouseEvent} */event){
-		this.dragged = false;
-	}
-
-	mousemoveHandler(/** @type {MouseEvent} */event){
-		if (this.dragged == true){
-			this.cursorX = event.clientX;
-			this.cursorY = event.clientY;
-			this._x = this.cursorX-this.width/2;
-			this._y = this.cursorY-this.height/2;
-			if (this._x + this.width > window.innerWidth){this._x = window.innerWidth - this.width;}
-			else if (this._x < 0){this._x = 0;}
-			if (this._y + this.height > window.innerHeight){this._y = window.innerHeight - this.height;}
-			else if (this._y < 0){this._y = 0;}
-			
-		}
+		this._x = this.prevX + this.vectorX;
+        this._y = this.prevY + this.vectorY;
+        if (this._x + this.width > window.innerWidth){this.vectorX = Math.abs(this.vectorX) * (-1);}
+        else if (this._x < 0 ){this.vectorX = Math.abs(this.vectorX);};
+        if (this._y + this.height > window.innerHeight){this.vectorY = Math.abs(this.vectorY) * (-1);}
+        else if (this._y < 0 ){this.vectorY = Math.abs(this.vectorY);};
+        this.update();
 	}
 
 }
@@ -136,39 +138,67 @@ class Clock {
 
 var clock = new Clock();
 
-var ks = new BouncingObject(ctx,"kingOfSpade.png",333,186);
+var ks = new BouncingObject(ctx,"kingOfSpade.png",13,"s",333,186);
 ks.id = "ks";
 ks.setStartPos(0,0);
 ks.setSpeed(4);
 ks.draw();
 
-var kh = new BouncingObject(ctx,"kingOfHeart.png",333,186);
+var kh = new BouncingObject(ctx,"kingOfHeart.png",13,"h",333,186);
 kh.id = "kh";
 kh.setStartPos(0,window.innerHeight-kh.height);
 kh.setSpeed(3);
 kh.draw();
 
-var kd = new BouncingObject(ctx,"kingOfDiamond.png",333,186);
+var kd = new BouncingObject(ctx,"kingOfDiamond.png",13,"d",333,186);
 kd.id = "kd";
 kd.setStartPos(window.innerWidth-kd.width,0);
 kd.setSpeed(2);
 kd.draw();
 
-var kc = new BouncingObject(ctx,"kingOfClub.png",333,186);
+var kc = new BouncingObject(ctx,"kingOfClub.png",13,"c",333,186);
 kc.id = "kc";
 kc.setStartPos(window.innerWidth-kc.width,window.innerHeight-kc.height);
 kc.draw();
 
-document.addEventListener("mousedown",function(event){
+document.addEventListener("click",function(event){
 	var len = layer.length;
 	for (var i = 0; i < layer.length; i++){
 		if (event.clientX <= layer[len-i-1].prevX + layer[len-i-1].width
 			&& event.clientX >= layer[len-i-1].prevX 
 			&& event.clientY <= layer[len-i-1].prevY + layer[len-i-1].height
 			&& event.clientY >= layer[len-i-1].prevY){
-			layer[len-i-1].dragged = true;
-			layer.push(layer[len-i-1]);
-			layer.splice(len-i-1,1);
+            if (layer[len-i-1].dragged == false){
+                if (revealed.length == 2){
+                    revealed[0].dragged = false;
+                    revealed[1].dragged = false;
+                    revealed = [];
+                }
+                layer[len-i-1].dragged = true;
+                revealed.push(layer[len-i-1]);
+            }
+            if (revealed.length == 2){
+                attempt += 1;
+                console.log("You have made " + attempt + " move(s)");
+                if (revealed[0].color == revealed[1].color 
+                    && revealed[0].rank == revealed[1].rank){
+                    revealed[0].remove = true;
+                    revealed[0].countdown = 60;
+                    revealed[1].remove = true;
+                    revealed[1].countdown = 60;
+                    
+                }else{
+                    revealed[0].autoSeal = true;
+                    revealed[0].countdown = 60;
+                    revealed[1].autoSeal = true;
+                    revealed[1].countdown = 60;
+                    layer.push(layer[len-i-1]);
+			        layer.splice(len-i-1,1);
+                }
+            }else{
+                layer.push(layer[len-i-1]);
+			    layer.splice(len-i-1,1);
+            }
 			break;
 		}
 	}
