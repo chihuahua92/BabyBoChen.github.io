@@ -7,7 +7,7 @@ canvas.height = window.innerHeight;
 
 window.addEventListener('resize',function(event){
     canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight;
 });
 
 /** @type {CanvasRenderingContext2D} */
@@ -39,7 +39,15 @@ class Clock {
 			timeString += this.timecode.toTimeString().charAt(i);
 		}
 		return timeString;
-	}
+    }
+    
+    getTimecode(){
+        var timeString = "";
+		for (var i = 0; i < 8; i++){
+			timeString += this.timecode.toTimeString().charAt(i);
+        }
+        return timeString;
+    }
 }
 
 var clock = new Clock();
@@ -54,59 +62,36 @@ for (var i = 0; i < cards.length; i ++){
 }
 
 document.addEventListener("click",function(event){
-	var len = layer.length;
+	var l = layer.length;
 	for (var i = 0; i < layer.length; i++){
-		if (event.clientX <= layer[len-i-1].prevX + layer[len-i-1].width
-			&& event.clientX >= layer[len-i-1].prevX 
-			&& event.clientY <= layer[len-i-1].prevY + layer[len-i-1].height
-			&& event.clientY >= layer[len-i-1].prevY){
-            if (layer[len-i-1].dragged == false){
-                if (revealed.length == 2){
-                    if (revealed[0].remove == true && revealed[1].remove == true){
-                        if (layer.includes(revealed[0])){
-                            layer.splice(layer.indexOf(revealed[0]),1);
+        if (event.clientX <= layer[l-i-1].prevX + layer[l-i-1].width && 
+            event.clientX >= layer[l-i-1].prevX && 
+            event.clientY <= layer[l-i-1].prevY + layer[l-i-1].height && 
+            event.clientY >= layer[l-i-1].prevY){
+            if (layer[l-i-1].dragged == false){
+                if (revealed.length < 2){
+                    layer[l-i-1].dragged = true;
+                    revealed.push(layer[l-i-1]);
+                    if (revealed.length == 2){
+                        if (revealed[0].rank == revealed[1].rank && revealed[0].color == revealed[1].color){
+                            revealed[0].remove = true;
+                            revealed[0].countdown = 30;
+                            revealed[1].remove = true;
+                            revealed[1].countdown = 30;
+                        }else{
+                            revealed[0].autoSeal = true;
+                            revealed[0].countdown = 30;
+                            revealed[1].autoSeal = true;
+                            revealed[1].countdown = 30;
                         }
-                        if (layer.includes(revealed[1])){
-                            layer.splice(layer.indexOf(revealed[1]),1);
-                        }
-                        revealed = [];
-                    }else{
-                        revealed[0].dragged = false;
-                        revealed[0].autoSeal = false;
-                        revealed[1].dragged = false;
-                        revealed[1].autoSeal = false;
-                        revealed = [];
-                        layer[len-i-1].dragged = true;
-                        revealed.push(layer[len-i-1]);
                     }
-                }else{
-                    layer[len-i-1].dragged = true;
-                    revealed.push(layer[len-i-1]);
+                }else if (revealed.length == 2){
+                    revealed[0].countdown = 0;
+                    revealed[1].countdown = 0;
                 }
             }
-            if (revealed.length == 2){
-                attempt += 1;
-                console.log("You have made " + attempt + " move(s)");
-                if (revealed[0].color == revealed[1].color 
-                    && revealed[0].rank == revealed[1].rank){
-                    revealed[0].remove = true;
-                    revealed[0].countdown = 30;
-                    revealed[1].remove = true;
-                    revealed[1].countdown = 30;
-                    layer.push(layer[len-i-1]);
-			        layer.splice(len-i-1,1);
-                }else{
-                    revealed[0].autoSeal = true;
-                    revealed[0].countdown = 60;
-                    revealed[1].autoSeal = true;
-                    revealed[1].countdown = 60;
-                    layer.push(layer[len-i-1]);
-			        layer.splice(len-i-1,1);
-                }
-            }else{
-                layer.push(layer[len-i-1]);
-			    layer.splice(len-i-1,1);
-            }
+            layer.push(layer[l-i-1]);
+            layer.splice(l-i-1,1);
 			break;
 		}
 	}
@@ -115,16 +100,27 @@ document.addEventListener("click",function(event){
 var refreshEvent = new CustomEvent("refresh",null);
 
 var mainloop = setInterval(refresh,1000/30);
+window.addEventListener("resize",function(event){
+    ctx.font = "20px Georgia";
+    ctx.fillText(clock.getTimecode(),10,20);
+    ctx.font = "50px Georgia";
+    ctx.fillText(clock.getTimecode(),canvas.width/2-100,canvas.height/2);
+    ctx.fillText("You have made " + attempt + " move(s)",canvas.width/2-100,canvas.height/2+50);
+});
 
 function refresh(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if (layer.length == 0){
         clearInterval(mainloop);
+        ctx.font = "50px Georgia";
+        ctx.fillText(clock.getTimecode(),canvas.width/2-100,canvas.height/2);
+        ctx.fillText("You have made " + attempt + " move(s)",canvas.width/2-100,canvas.height/2+50);
+    }else{
+        var timeDisplay = clock.tick();
+        ctx.font = "50px Georgia";
+        ctx.fillText(timeDisplay,10,50);
+        layer.forEach(/** @type {BouncingObject} */element => {
+            element.dispatchEvent(refreshEvent);
+        });
     }
-    var timeDisplay = clock.tick();
-    ctx.font = "20px Georgia";
-    ctx.fillText(timeDisplay,10,20);
-    layer.forEach(/** @type {BouncingObject} */element => {
-        element.dispatchEvent(refreshEvent);
-    });
 }
