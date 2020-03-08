@@ -49,7 +49,7 @@ class Clock {
 
 var clock = new Clock();
 
-for (var i = 0; i < cards.length-8; i ++){
+for (var i = 0; i < cards.length; i ++){
     var card = cards[i];
     var bo = new BouncingObject(ctx,card.card,card.rank,card.suit,card.width,card.height);
     bo.id - card.id;
