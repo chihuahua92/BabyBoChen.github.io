@@ -73,6 +73,7 @@ document.addEventListener("click",function(event){
                     layer[l-i-1].dragged = true;
                     revealed.push(layer[l-i-1]);
                     if (revealed.length == 2){
+			attempt ++;
                         if (revealed[0].rank == revealed[1].rank && revealed[0].color == revealed[1].color){
                             revealed[0].remove = true;
                             revealed[0].countdown = 30;
