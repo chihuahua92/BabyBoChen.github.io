@@ -12,7 +12,7 @@ class BouncingObject extends Image{
         }else if (this.suit == "heart" || this.suit == "diamond"){
             this.color = "red";
         }
-        this.seal = "asset/back.png";
+        this.seal = "back.png";
 		this.src = card;
 		this.width = width;
 		this.height = height;
