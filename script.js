@@ -1,6 +1,3 @@
-var body = document.querySelector("body");
-
-
 var canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -52,7 +49,7 @@ class Clock {
 
 var clock = new Clock();
 
-for (var i = 0; i < cards.length; i ++){
+for (var i = 0; i < cards.length-8; i ++){
     var card = cards[i];
     var bo = new BouncingObject(ctx,card.card,card.rank,card.suit,card.width,card.height);
     bo.id - card.id;
@@ -73,7 +70,7 @@ document.addEventListener("click",function(event){
                     layer[l-i-1].dragged = true;
                     revealed.push(layer[l-i-1]);
                     if (revealed.length == 2){
-			attempt ++;
+                        attempt ++;
                         if (revealed[0].rank == revealed[1].rank && revealed[0].color == revealed[1].color){
                             revealed[0].remove = true;
                             revealed[0].countdown = 30;
@@ -102,11 +99,9 @@ var refreshEvent = new CustomEvent("refresh",null);
 
 var mainloop = setInterval(refresh,1000/30);
 window.addEventListener("resize",function(event){
-    ctx.font = "20px Georgia";
-    ctx.fillText(clock.getTimecode(),10,20);
     ctx.font = "50px Georgia";
-    ctx.fillText(clock.getTimecode(),canvas.width/2-100,canvas.height/2);
-    ctx.fillText("You have made " + attempt + " move(s)",canvas.width/2-100,canvas.height/2+50);
+    ctx.fillText(clock.getTimecode(),50,canvas.height/2);
+    ctx.fillText("You have made " + attempt + " move(s)",50,canvas.height/2+50);
 });
 
 function refresh(){
@@ -114,8 +109,8 @@ function refresh(){
     if (layer.length == 0){
         clearInterval(mainloop);
         ctx.font = "50px Georgia";
-        ctx.fillText(clock.getTimecode(),canvas.width/2-100,canvas.height/2);
-        ctx.fillText("You have made " + attempt + " move(s)",canvas.width/2-100,canvas.height/2+50);
+        ctx.fillText(clock.getTimecode(),50,canvas.height/2);
+        ctx.fillText("You have made " + attempt + " move(s)",50,canvas.height/2+50);
     }else{
         var timeDisplay = clock.tick();
         ctx.font = "50px Georgia";
