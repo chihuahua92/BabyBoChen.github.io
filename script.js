@@ -71,7 +71,8 @@ document.addEventListener("click",function(event){
                     revealed.push(layer[l-i-1]);
                     if (revealed.length == 2){
                         attempt ++;
-                        if (revealed[0].rank == revealed[1].rank && revealed[0].color == revealed[1].color){
+                        if (revealed[0].rank == revealed[1].rank && 
+                            revealed[0].color == revealed[1].color){
                             revealed[0].remove = true;
                             revealed[0].countdown = 30;
                             revealed[1].remove = true;
@@ -115,8 +116,19 @@ function refresh(){
         var timeDisplay = clock.tick();
         ctx.font = "50px Georgia";
         ctx.fillText(timeDisplay,10,50);
-        layer.forEach(/** @type {BouncingObject} */element => {
-            element.dispatchEvent(refreshEvent);
-        });
+        var revealed2 = [];
+        for (var i = 0; i < layer.length; i++){
+            layer[i].dispatchEvent(refreshEvent);
+            if (layer[i].dragged == true){
+                revealed2.push(layer[i]);
+            }
+        }
+        if (revealed2.length > 2){
+            for (var i = 0; i < revealed2.length; i++){
+                revealed2[i].dragged = false;
+                revealed2[i].autoSeal = false;
+                revealed2[i].countdown = 0;
+            }
+        }
     }
 }
