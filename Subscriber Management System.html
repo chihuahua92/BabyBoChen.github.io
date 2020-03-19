@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html>
+    <head>	
+        <title>訂戶管理系統</title>
+		<style>
+			h2{margin: 1px;}
+			p{margin: 2px;}
+			.bordered{border: 1px solid black;border-collapse: collapse; padding: 5px;}
+			.delCol{text-align:center;}
+			.fakeLink{color:blue;text-decoration: underline;}
+			.idCol{text-align:center;}
+			.emailCol{text-align:center;}
+			.subTimeCol{text-align:center;}
+			.certCol{text-align:center;}
+		</style>
+    </head>
+    <body>
+		<div>
+			<table width="100%">
+				<tr>
+					<td style="text-align: center;">
+						<h2>電子報訂戶管理系統草稿</h2>
+					</td>
+				</tr>
+			</table>
+			<table style="margin-left: auto; margin-right: auto; ">
+				<tr>
+					<td>
+						<input id="entrySearch" type="text" style="width:40%; height:20px; margin:5px; font-size:18px;"/>
+						<input id="btnSearch" type="button" value="搜尋"/>
+						<input id="btnClearSearch" type="button" value="清除"/>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span>(</span>
+						<input id="btnSub" type="button" value="模擬訂閱"/>
+						<span>)</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" id="subList" class="bordered"></table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%">
+							<tr>
+								<td style="text-align: center;">
+									<div id="pages"></div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">
+						<input id="btnImport" type="button" value="匯入自excel"/>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<a href="https://1drv.ms/x/s!AhqCX58aBNtNvUyvDGUPBTCf50e1?e=dcGWMm" target="blank" download>
+							<input id="btnDownload" type="button" value="匯出成excel"/>
+						</a>
+					</td>
+				</tr>
+			</table>
+			<table style="margin-top: 20px;" width="100%">
+				<tr>
+					<td style="text-align: center; border-top: 1px solid black;">
+						<table style="margin-left: auto; margin-right: auto; ">
+							<tr>
+								<td>
+									<h2>說明</h2>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: left;">
+									<p>1.目前僅需要這些欄位，日後是否還能擴充？</p>
+									<p>2.ID流水號不會回溯，即使訂戶退訂後同一個ID不會再重複利用。</p>
+									<p>3.部份欄位具有排序功能。</p>
+									<p>4.訂閱時間是在訂閱當下自動產生。草稿中的時間格式不太好看，無參考價值。</p>
+									<p>5.信箱認證部份，在發送電子報時能否自動判斷訂戶的認證狀態？不發電子報予未認證者。</p>
+									<p>6.「匯入自excel」功能是上傳一份excel檔並覆蓋現有的資料庫，所以會是一個具有危險性的功能。</p>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		<!-- <script src="script.js"></script> -->
+		<script>
+			var subscribers = [];
+			var delCheckboxs = [];
+			var selectedId = 0;
+			var currentRange = 0;
+			var query = [];
+			var pagesCount = 0;
+			var pagesLink = "";
+			var lastID = 0;
+			var editMode = false;
+			var sortScending = 1;
+
+			/* populate 100 subscribers */
+			for (var i = 0; i < 100; i++){
+				var sub = {
+					id : i,
+					email : "account" + i + "@hostname" + i + ".com",
+					subDateNow : Date.now() - (100-i) * 938347,
+					subDate : new Date(Date.now() - (100-i) * 938347),
+					cert : true,
+				}
+				if (i >= 94 && i % 2 != 0){
+					sub.cert = false;
+				}
+				subscribers.unshift(sub);
+				lastID = i;
+			}
+
+			/* get dom element */
+			var subList = document.getElementById("subList");
+			var entrySearch = document.getElementById("entrySearch");
+			var btnSearch = document.getElementById("btnSearch");
+			btnSearch.addEventListener("click",search);
+			var btnClearSearch = document.getElementById("btnClearSearch");
+			btnClearSearch.addEventListener("click",clearSearch);
+			var btnSub = document.getElementById("btnSub");
+			btnSub.addEventListener("click",subscribe);
+			var btnImport = document.getElementById("btnImport");
+			btnImport.addEventListener("click",function(){
+				var confirmOverwrite = confirm("是否確定要覆蓋現在的訂戶資料庫？");
+				if (confirmOverwrite){
+					var confirmOverwrite2 = confirm("Are you surely surely surely sure?");
+					if (confirmOverwrite2){
+						alert("覆蓋了！");
+					}else{
+						alert("沒事不要亂按！");
+					}
+				}else{
+					alert("沒事不要亂按！");
+				}
+			});
+			var pagesDiv = document.getElementById("pages");
+
+			/* init */
+			loadSubData(0);
+
+			/* function */
+			function search(){
+				query = [];
+				if (entrySearch.value == ""){
+					return;
+				}
+				for (var i = 0; i < subscribers.length; i++){
+					if (subscribers[i].email.includes(entrySearch.value)){
+						query.push(subscribers[i]);
+					}
+				}
+				loadQuery();
+				pagesDiv.innerHTML = "";
+				
+			}
+
+			function clearSearch(){
+				entrySearch.value = "";
+				loadSubData(0);
+			}
+
+			function subscribe(){
+				var newEmail = prompt("請輸入您的email：");
+				if (newEmail == "" || newEmail == null){
+					return;
+				}
+				var newSub = {
+					id : lastID + 1,
+					email : newEmail,
+					subDateNow : Date.now(),
+					subDate : new Date(Date.now()),
+					cert : false,
+				}
+				lastID = newSub.id;
+				subscribers.unshift(newSub);
+				loadSubData(0);
+			}
+
+			function checkID(sub){
+				return sub.id == selectedId;
+			}
+
+			function delSub(range){
+				for (var i = 0; i < delCheckboxs.length; i++){
+					if (delCheckboxs[i].checked){
+						selectedId = parseInt(delCheckboxs[i].getAttribute("subid"));
+						var index = subscribers.indexOf(subscribers.find(checkID));
+						subscribers.splice(index,1);
+					}
+				}
+				loadSubData(range);
+			}
+
+			function sortID(){
+				if (sortScending == 1){
+					subscribers.sort(function(a,b){
+						return a.id - b.id;
+					});
+				}else{
+					subscribers.sort(function(a,b){
+						return b.id - a.id;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadSubData(currentRange);
+			}
+
+			function sortSubTime(){
+				if (sortScending == 1){
+					subscribers.sort(function(a,b){
+						return a.subDateNow - b.subDateNow;
+					});
+				}else{
+					subscribers.sort(function(a,b){
+						return b.subDateNow - a.subDateNow;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadSubData(currentRange);
+			}
+
+			function sortCert(){
+				if (sortScending == 1){
+					subscribers.sort(function(a,b){
+						return a.cert - b.cert;
+					});
+				}else{
+					subscribers.sort(function(a,b){
+						return b.cert - a.cert;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadSubData(currentRange);
+			}
+
+			function edit(e){
+				if (editMode == true){
+					return;
+				}else{
+					editMode = true;
+				}
+				var btnCell = e.toElement.parentElement;
+				var editingID = parseInt(e.toElement.getAttribute("subid"));
+				var editingCell1 = document.getElementById("cell" + editingID + ":2");
+				var originalEmail = editingCell1.innerHTML;
+				var entryEditEmail = document.createElement("input");
+				entryEditEmail.setAttribute("type","text");
+				entryEditEmail.value = originalEmail;
+				editingCell1.innerHTML = "";
+				editingCell1.appendChild(entryEditEmail);
+				var editingCell2 = document.getElementById("cell" + editingID + ":4");
+				var originalCert = editingCell2.innerHTML;
+				var entryEditCert = document.createElement("input");
+				entryEditCert.setAttribute("type","text");
+				entryEditCert.setAttribute("style","width:25px;");
+				if (originalCert == "已認證"){
+					entryEditCert.value = 1;
+				}else{
+					entryEditCert.value = 0;
+				}
+				editingCell2.innerHTML = "";
+				editingCell2.appendChild(entryEditCert);
+				var btnSave = document.createElement("input");
+				btnSave.setAttribute("type","button");
+				btnSave.setAttribute("value","save");
+				btnCell.appendChild(btnSave);
+				var btnCancel = document.createElement("input");
+				btnCancel.setAttribute("type","button");
+				btnCancel.setAttribute("value","cancel");
+				btnCell.appendChild(btnCancel);
+				btnCell.removeChild(e.toElement);
+				btnSave.addEventListener("click",function(){
+					var editingSub = subscribers.find(function(sub){
+						return sub.id == editingID;
+					});
+					editingSub.email = entryEditEmail.value;
+					if (entryEditCert.value == 1){
+						editingSub.cert = true;
+					}else{
+						editingSub.cert = false;
+					}
+					loadSubData(currentRange);
+				});
+				btnCancel.addEventListener("click",function(){
+					editingCell1.innerHTML = "";
+					editingCell1.innerHTML = originalEmail;
+					editingCell2.innerHTML = "";
+					editingCell2.innerHTML = originalCert;
+					btnCell.removeChild(btnSave);
+					btnCell.removeChild(btnCancel);
+					btnCell.appendChild(e.toElement);
+					editMode = false;
+				});
+			}
+
+			function loadSubData(range){
+				
+				subList.innerHTML = "";
+				delCheckboxs = [];
+				editMode = false;
+
+				var row0 = subList.insertRow(0);
+				row0.id = "row0";
+				var cell00 = row0.insertCell(0);
+				cell00.classList.add("delCol");
+				cell00.classList.add("fakeLink");
+				cell00.classList.add("bordered");
+				var cell01 = row0.insertCell(1);
+				cell01.classList.add("idCol");
+				cell01.classList.add("bordered");
+				var cell02 = row0.insertCell(2);
+				cell02.classList.add("emailCol");
+				cell02.classList.add("bordered");
+				var cell03 = row0.insertCell(3);
+				cell03.classList.add("subTimeCol");
+				cell03.classList.add("bordered");
+				var cell04 = row0.insertCell(4);
+				cell04.classList.add("certCol");
+				cell04.classList.add("bordered");
+				var cell05 = row0.insertCell(5);
+				cell05.classList.add("bordered");
+				cell05.classList.add("certCol");
+
+				var btnDel = document.createElement("input");
+				btnDel.setAttribute("type","button");
+				btnDel.setAttribute("value","刪除");
+				btnDel.addEventListener("click",function(e){
+					delSub(range);
+				});
+				cell00.appendChild(btnDel);
+
+				var btnID = document.createElement("input");
+				btnID.setAttribute("type","button");
+				btnID.setAttribute("value","ID");
+				btnID.addEventListener("click",sortID);
+				cell01.appendChild(btnID);
+
+				cell02.innerHTML = "email地址";
+
+				var btnSubTime = document.createElement("input");
+				btnSubTime.setAttribute("type","button");
+				btnSubTime.setAttribute("value","訂閱時間");
+				btnSubTime.addEventListener("click",sortSubTime);
+				cell03.appendChild(btnSubTime);
+				
+				var btnCert = document.createElement("input");
+				btnCert.setAttribute("type","button");
+				btnCert.setAttribute("value","信箱認證");
+				btnCert.addEventListener("click",sortCert);
+				cell04.appendChild(btnCert);
+
+				cell05.innerHTML = "修改";
+
+				for (var i = 0; i < 20; i++){
+					var j = i + range*20;
+					if (j >= subscribers.length){
+						break;
+					}
+					var newRow = subList.insertRow(i+1);
+					newRow.id = "row" + subscribers[j].id;
+					var newCell0 = newRow.insertCell(0);
+					newCell0.id = "cell" + subscribers[j].id + ":" + "0";
+					var delCheckbox = document.createElement("INPUT");
+					delCheckbox.setAttribute("type","checkbox");
+					delCheckbox.setAttribute("id","checkbox" + (i+1));
+					delCheckbox.setAttribute("subId",subscribers[j].id);
+					delCheckboxs.push(delCheckbox);
+					newCell0.appendChild(delCheckbox);
+					newCell0.classList.add("delCol");
+					newCell0.classList.add("bordered");
+					var newCell1 = newRow.insertCell(1);
+					newCell1.id = "cell" + subscribers[j].id + ":" + "1";
+					newCell1.classList.add("idCol");
+					newCell1.classList.add("bordered");
+					newCell1.innerHTML = subscribers[j].id;
+					var newCell2 = newRow.insertCell(2);
+					newCell2.id = "cell" + subscribers[j].id + ":"+ "2";
+					newCell2.classList.add("bordered");
+					newCell2.innerHTML = subscribers[j].email;
+					var newCell3 = newRow.insertCell(3);
+					newCell3.id = "cell" + subscribers[j].id + ":"+ "3";
+					newCell3.classList.add("bordered");
+					var timeString = "";
+					for (var k = 0; k < 8; k++){
+						timeString += subscribers[j].subDate.toTimeString()[k];
+					}
+					newCell3.innerHTML = subscribers[j].subDate.toDateString() + " " + timeString;
+					var newCell4 = newRow.insertCell(4);
+					newCell4.id = "cell" + subscribers[j].id + ":"+ "4";
+					newCell4.classList.add("deleteCol");
+					newCell4.classList.add("bordered");
+					if (subscribers[j].cert == true){
+						newCell4.innerHTML = "已認證";
+					}else{
+						newCell4.innerHTML = "未認證";
+					}
+					var newCell5 = newRow.insertCell(5);
+					newCell5.id = "cell" + subscribers[j].id + ":"+ "5";
+					newCell5.classList.add("bordered");
+					var btnEdit = document.createElement("input");
+					btnEdit.addEventListener("click",edit);
+					btnEdit.setAttribute("id",subscribers[j].id + " editor");
+					btnEdit.setAttribute("subid",subscribers[j].id)
+					btnEdit.setAttribute("type","button");
+					btnEdit.setAttribute("value","修改");
+					newCell5.appendChild(btnEdit);
+				}
+
+				pagesCount = Math.ceil(subscribers.length/20);
+				pagesLink = "";
+				for (var i = 0; i < pagesCount; i++){
+					if (i == range){
+						pagesLink += "<a onclick=\"toPage(" + i + ")\">"+i+"</a>";
+					}else{
+						pagesLink += "<a class=\"fakeLink\" onclick=\"toPage(" + i + ")\">"+i+"</a>";
+					}
+					pagesLink += "&nbsp;";
+				}
+				pagesDiv.innerHTML = pagesLink;
+			}
+
+			function delFromQuery(){
+				for (var i = 0; i < delCheckboxs.length; i++){
+					if (delCheckboxs[i].checked){
+						selectedId = parseInt(delCheckboxs[i].getAttribute("subid"));
+						var queryIndex = query.indexOf(query.find(checkID));
+						query.splice(queryIndex,1);
+						var index = subscribers.indexOf(subscribers.find(checkID));
+						subscribers.splice(index,1);
+					}
+				}
+				loadQuery();
+			}
+
+			function sortIDFromQuery(){
+				if (sortScending == 1){
+					query.sort(function(a,b){
+						return a.id - b.id;
+					});
+				}else{
+					query.sort(function(a,b){
+						return b.id - a.id;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadQuery();
+			}
+
+			function sortSubTimeFromQuery(){
+				if (sortScending == 1){
+					query.sort(function(a,b){
+						return a.subDateNow - b.subDateNow;
+					});
+				}else{
+					query.sort(function(a,b){
+						return b.subDateNow - a.subDateNow;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadQuery();
+			}
+
+			function sortCertFromQuery(){
+				if (sortScending == 1){
+					query.sort(function(a,b){
+						return a.cert - b.cert;
+					});
+				}else{
+					query.sort(function(a,b){
+						return b.cert - a.cert;
+					});
+				}
+				sortScending = sortScending * (-1);
+				loadQuery();
+			}
+
+			function editFromQuery(e){
+				if (editMode == true){
+					return;
+				}else{
+					editMode = true;
+				}
+				var btnCell = e.toElement.parentElement;
+				var editingID = parseInt(e.toElement.getAttribute("subid"));
+				var editingCell1 = document.getElementById("cell" + editingID + ":2");
+				var originalEmail = editingCell1.innerHTML;
+				var entryEditEmail = document.createElement("input");
+				entryEditEmail.setAttribute("type","text");
+				entryEditEmail.value = originalEmail;
+				editingCell1.innerHTML = "";
+				editingCell1.appendChild(entryEditEmail);
+				var editingCell2 = document.getElementById("cell" + editingID + ":4");
+				var originalCert = editingCell2.innerHTML;
+				var entryEditCert = document.createElement("input");
+				entryEditCert.setAttribute("type","text");
+				entryEditCert.setAttribute("style","width:25px;");
+				if (originalCert == "已認證"){
+					entryEditCert.value = 1;
+				}else{
+					entryEditCert.value = 0;
+				}
+				editingCell2.innerHTML = "";
+				editingCell2.appendChild(entryEditCert);
+				var btnSave = document.createElement("input");
+				btnSave.setAttribute("type","button");
+				btnSave.setAttribute("value","save");
+				btnCell.appendChild(btnSave);
+				var btnCancel = document.createElement("input");
+				btnCancel.setAttribute("type","button");
+				btnCancel.setAttribute("value","cancel");
+				btnCell.appendChild(btnCancel);
+				btnCell.removeChild(e.toElement);
+				btnSave.addEventListener("click",function(){
+					var editingSub = subscribers.find(function(sub){
+						return sub.id == editingID;
+					});
+					editingSub.email = entryEditEmail.value;
+					if (entryEditCert.value == 1){
+						editingSub.cert = true;
+					}else{
+						editingSub.cert = false;
+					}
+					loadQuery();
+				});
+				btnCancel.addEventListener("click",function(){
+					editingCell1.innerHTML = "";
+					editingCell1.innerHTML = originalEmail;
+					editingCell2.innerHTML = "";
+					editingCell2.innerHTML = originalCert;
+					btnCell.removeChild(btnSave);
+					btnCell.removeChild(btnCancel);
+					btnCell.appendChild(e.toElement);
+					editMode = false;
+				});
+			}
+
+			function loadQuery(){
+
+				subList.innerHTML = "";
+				delCheckboxs = [];
+				editMode = false;
+
+				var row0 = subList.insertRow(0);
+				row0.id = "row0";
+				var cell00 = row0.insertCell(0);
+				cell00.classList.add("delCol");
+				cell00.classList.add("fakeLink");
+				cell00.classList.add("bordered");
+				var cell01 = row0.insertCell(1);
+				cell01.classList.add("idCol");
+				cell01.classList.add("bordered");
+				var cell02 = row0.insertCell(2);
+				cell02.classList.add("emailCol");
+				cell02.classList.add("bordered");
+				var cell03 = row0.insertCell(3);
+				cell03.classList.add("subTimeCol");
+				cell03.classList.add("bordered");
+				var cell04 = row0.insertCell(4);
+				cell04.classList.add("certCol");
+				cell04.classList.add("bordered");
+				var cell05 = row0.insertCell(5);
+				cell05.classList.add("bordered");
+				cell05.classList.add("certCol");
+
+				var btnDel = document.createElement("input");
+				btnDel.setAttribute("type","button");
+				btnDel.setAttribute("value","刪除");
+				btnDel.addEventListener("click",delFromQuery);
+				cell00.appendChild(btnDel);
+
+				var btnID = document.createElement("input");
+				btnID.setAttribute("type","button");
+				btnID.setAttribute("value","ID");
+				btnID.addEventListener("click",sortIDFromQuery);
+				cell01.appendChild(btnID);
+
+				cell02.innerHTML = "email地址";
+
+				var btnSubTime = document.createElement("input");
+				btnSubTime.setAttribute("type","button");
+				btnSubTime.setAttribute("value","訂閱時間");
+				btnSubTime.addEventListener("click",sortSubTimeFromQuery);
+				cell03.appendChild(btnSubTime);
+
+				var btnCert = document.createElement("input");
+				btnCert.setAttribute("type","button");
+				btnCert.setAttribute("value","信箱認證");
+				btnCert.addEventListener("click",sortCertFromQuery);
+				cell04.appendChild(btnCert);
+
+				cell05.innerHTML = "修改";
+
+				for (var i = 0; i < query.length; i++){
+					var newRow = subList.insertRow(i+1);
+					newRow.id = "row" + query[i].id;
+					var newCell0 = newRow.insertCell(0);
+					var delCheckbox = document.createElement("INPUT");
+					delCheckbox.setAttribute("type","checkbox");
+					delCheckbox.setAttribute("id","checkbox" + (i+1));
+					delCheckbox.setAttribute("subId",query[i].id);
+					delCheckboxs.push(delCheckbox);
+					newCell0.appendChild(delCheckbox);
+					newCell0.classList.add("delCol");
+					newCell0.classList.add("bordered");
+					var newCell1 = newRow.insertCell(1);
+					newCell1.id = "cell" + query[i].id + ":" + "1";
+					newCell1.classList.add("idCol");
+					newCell1.classList.add("bordered");
+					newCell1.innerHTML = query[i].id;
+					var newCell2 = newRow.insertCell(2);
+					newCell2.id = "cell" + query[i].id + ":"+ "2";
+					newCell2.classList.add("bordered");
+					newCell2.innerHTML = query[i].email;
+					var newCell3 = newRow.insertCell(3);
+					newCell3.id = "cell" + query[i].id + ":"+ "3";
+					newCell3.classList.add("bordered");
+					var timeString = "";
+					for (var k = 0; k < 8; k++){
+						timeString += query[i].subDate.toTimeString()[k];
+					}
+					newCell3.innerHTML = query[i].subDate.toDateString() + " " + timeString;
+					var newCell4 = newRow.insertCell(4);
+					newCell4.id = "cell" + query[i].id + ":"+ "4";
+					newCell4.classList.add("deleteCol");
+					newCell4.classList.add("bordered");
+					if (query[i].cert == true){
+						newCell4.innerHTML = "已認證";
+					}else{
+						newCell4.innerHTML = "未認證";
+					}
+					var newCell5 = newRow.insertCell(5);
+					newCell5.id = "cell" + query[i].id + ":"+ "5";
+					newCell5.classList.add("bordered");
+					var btnEdit = document.createElement("input");
+					btnEdit.addEventListener("click",editFromQuery);
+					btnEdit.setAttribute("id",query[i].id + " editor");
+					btnEdit.setAttribute("subid",query[i].id)
+					btnEdit.setAttribute("type","button");
+					btnEdit.setAttribute("value","修改");
+					newCell5.appendChild(btnEdit);
+				}
+			}
+
+			function toPage(page){
+				loadSubData(page);
+				currentRange = page;
+			}
+		</script>
+    </body>
+</html lang="zh-Hant">
