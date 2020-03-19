@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-Hant">
+<html>
     <head>	
         <title>訂戶管理系統</title>
 		<style>
@@ -243,8 +243,8 @@
 				}else{
 					editMode = true;
 				}
-				var btnCell = e.toElement.parentElement;
-				var editingID = parseInt(e.toElement.getAttribute("subid"));
+				var btnCell = e.target.parentElement;
+				var editingID = parseInt(e.target.getAttribute("subid"));
 				var editingCell1 = document.getElementById("cell" + editingID + ":2");
 				var originalEmail = editingCell1.innerHTML;
 				var entryEditEmail = document.createElement("input");
@@ -272,7 +272,7 @@
 				btnCancel.setAttribute("type","button");
 				btnCancel.setAttribute("value","cancel");
 				btnCell.appendChild(btnCancel);
-				btnCell.removeChild(e.toElement);
+				btnCell.removeChild(e.target);
 				btnSave.addEventListener("click",function(){
 					var editingSub = subscribers.find(function(sub){
 						return sub.id == editingID;
@@ -292,7 +292,7 @@
 					editingCell2.innerHTML = originalCert;
 					btnCell.removeChild(btnSave);
 					btnCell.removeChild(btnCancel);
-					btnCell.appendChild(e.toElement);
+					btnCell.appendChild(e.target);
 					editMode = false;
 				});
 			}
@@ -484,8 +484,8 @@
 				}else{
 					editMode = true;
 				}
-				var btnCell = e.toElement.parentElement;
-				var editingID = parseInt(e.toElement.getAttribute("subid"));
+				var btnCell = e.target.parentElement;
+				var editingID = parseInt(e.target.getAttribute("subid"));
 				var editingCell1 = document.getElementById("cell" + editingID + ":2");
 				var originalEmail = editingCell1.innerHTML;
 				var entryEditEmail = document.createElement("input");
@@ -513,7 +513,7 @@
 				btnCancel.setAttribute("type","button");
 				btnCancel.setAttribute("value","cancel");
 				btnCell.appendChild(btnCancel);
-				btnCell.removeChild(e.toElement);
+				btnCell.removeChild(e.target);
 				btnSave.addEventListener("click",function(){
 					var editingSub = subscribers.find(function(sub){
 						return sub.id == editingID;
@@ -533,7 +533,7 @@
 					editingCell2.innerHTML = originalCert;
 					btnCell.removeChild(btnSave);
 					btnCell.removeChild(btnCancel);
-					btnCell.appendChild(e.toElement);
+					btnCell.appendChild(e.target);
 					editMode = false;
 				});
 			}
