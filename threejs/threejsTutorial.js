@@ -302,3 +302,8 @@ window.addEventListener("mousemove",function(mouseEvent){
         beginViewnAngleY = mouseEvent.clientY;
     }
 });
+
+var moveForward = new KeyboardEvent("keydown", { key: "w" });
+var moveLeft = new KeyboardEvent("keydown", { key: "a" });
+var moveRight = new KeyboardEvent("keydown", { key: "d" });
+var moveBackward = new KeyboardEvent("keydown", { key: "s" });
