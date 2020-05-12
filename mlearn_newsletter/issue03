@@ -1,0 +1,129 @@
+<!--content wrapper-->
+<div style="background-color: rgba(230,230,230,0.75); font-family: Microsoft JhengHei;">
+
+    <!--content table-->
+    <table style="max-width:700px; border: none; border-spacing: 0; background-color: white; font-size: 16px; color: #666666; line-height: 30px;" border="0" cellspacing="1" cellpadding="1" align="center">
+        <tbody>
+            <!--banner-->
+            <tr>
+                <td style="text-align: center; padding-top: 10px; padding-bottom: 5px;"><a href="https://mlearn.moe.gov.tw/" target="_blank"><img style="height: auto; max-width: 100%;" src="https://i.imgur.com/f9hu0o3.png" alt="" /></a></td>
+            </tr>
+
+            <!--link to website, fb and issue date-->
+            <tr>
+                <td>
+                    <table style="border: none; text-align: center; font-size: 16px; color: #666666;" width="100%">
+                        <tbody>
+                            <tr>
+                                <!--link to website and fb-->
+                                <td style="width:50%; padding-left: 10px; text-align: left; font-size: 16px; border-right: 2px solid #0A7389;">媒體素養教育資源網：<a href="https://mlearn.moe.gov.tw/" target="_blank">首頁</a>｜<a href="https://www.facebook.com/%E5%AA%92%E9%AB%94%E7%B4%A0%E9%A4%8A%E6%95%99%E8%82%B2%E8%B3%87%E6%BA%90%E7%B6%B2-111015353809414/"  target="_blank">FB</a></td>
+                                <!--issue date-->
+                                <td style="width:50%; padding-right: 10px; text-align: right; font-size: 16px;">第3期／發刊日期：未訂</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <!--editorial-->
+            <tr>
+                <td style="text-align: center; border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>編輯室報告</strong></h2>
+                    <p style="font-size: 16px; margin: 5px; text-align: center; color: #666666;">💥重磅登場💥</p>
+                    <p style="font-size: 16px; margin: 5px; text-align: left; color: #666666;">媒體素養教育資源網定期推出主題策展，邀請專家學者與教師分享他們的專業經驗，集合數篇文章以多元的視角探討媒體素養教育的核心主題。</p>
+                    <p style="font-size: 16px; margin: 5px; text-align: left; color: #666666;">本期推出首波主題策展：《你可以是打假達人！破解假訊息隱藏的「達文西密碼」》。本次主題針對「假新聞」❌、「假訊息」❌等現象，邀請了媒體行動組織與學校教師們分享他們的觀察與教學經驗。打假人人有責👊，就讓我們一起破解假訊息隱藏的「達文西密碼」🔍，培養我們對不實訊息的敏銳嗅覺及辨識素養吧！</p>
+                    <p style="font-size: 16px; margin: 5px; text-align: left; color: #666666;">另外，也請各位師長朋友們不要忘了到訪我們剛上線的<a href="https://www.facebook.com/%E5%AA%92%E9%AB%94%E7%B4%A0%E9%A4%8A%E6%95%99%E8%82%B2%E8%B3%87%E6%BA%90%E7%B6%B2-111015353809414/" target="_blank">臉書粉絲專頁</a>，按讚👍並追蹤我們哦！🙏</p>
+                </td>
+            </tr>
+
+            <!--column 1-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>主題策展：你可以是打假達人！破解假訊息隱藏的「達文西密碼」</strong></h2>
+                    <p style="font-size: 16px; text-align: center; margin: 5px;"><a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10547" target="_blank"><img style="height: auto; max-width: 100%;" src="https://admin.mlearn.moe.gov.tw/Files/Image/ED/57b748ab-cbcc-4690-a35b-856962ee35b5.png" alt="" /></a></p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px; color: #666666;">數月以來，為了對抗新型冠狀病毒所帶來的生命威脅，國人莫不全神貫注、積極防疫，希望儘快遏止此一世紀性的病毒風暴。但積極防疫之際，我們卻發現假訊息也像病毒一般，如影隨形、揮之不去。不論是疫情狀況，或是防護方法，假訊息都能借力使力，趁勢而上。</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px; color: #666666;">防疫已夠艱辛，竟然還要防假，真是讓人傷透腦筋。但是假訊息確實傷害多，一旦誤入它的圈套，輕則損及個人健康，重則造成社會動盪，如果不能加以遏止，防疫工作就會出現許多破口。然而，我們要如何避免假訊息誤導我們的認知？又要如何避免假訊息所可能帶來的危害呢？......<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10547" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+			<!--column 2-->
+			<tr>
+				<td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+					<h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>壹、阿嬤都看得懂的假新聞分析！第一線的謠言受害事件簿</strong></h2>
+                    <p style="margin: 5px;">作者：假新聞清潔劑／資訊素養教育單位</p>
+                    <p style="font-size: 16px; text-align: center; margin: 5px;"><a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10543&aid=mlx13vKZ5b53dpIKIcUINhgrav8fXrdoa7OWjolxAqk%3d" target="_blank"><img style="height: auto; max-width: 100%;" src="https://admin.mlearn.moe.gov.tw/Files/Image/ED/4f36a768-8016-4b47-b64f-60edd6f4459f.png" alt="" /></a></p>
+					<p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">假新聞清潔劑過去一年來，用業餘時間到登山口、菜市場、社區關懷據點等地，舉辦街頭行動以及宣講，用切身相關的生活案例，深入講解假新聞的嚴重性，建立資訊時代的基礎防禦力，幾乎走遍了全臺鄉鎮。</p>
+					<p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">以下是我們在第一線教學現場，所觀察到的假消息特性。這裡所謂的特性，包含閱聽者如何接觸到假消息、為何會相信假消息並進而擴散，以及假消息所具有的幾項特徵。......<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10543&aid=mlx13vKZ5b53dpIKIcUINhgrav8fXrdoa7OWjolxAqk%3d" target="_blank">閱讀全文</a></p>
+				</td>
+            </tr>
+            
+			<!--column 3-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>貳、你並不孤單！──蔓延全球的事實查核運動與臺灣的事實查核機構介紹</strong></h2>
+                    <p style="font-size: 16px; margin: 5px;">作者：陳柏頤／媒體素養教育工作者</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">藉由「國際事實查核聯盟」（International Fact-Checking Network, 簡稱IFCN）的推廣與機構化的全球串連行動，「事實查核運動」昇華成了一種國際風潮，在各個地方皆獲得響應。現今IFCN已累積了八十多個認證成員組織，這些組織遍布全球五十多個國家。而在我國，事實查核運動也取得了相當大的成果。接續，本文便介紹四個臺灣知名事實查核機構以及如何掌握他們第一手查核資訊。……<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10544&aid=mlx13vKZ5b53dpIKIcUINhgrav8fXrdoa7OWjolxAqk%3d" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+            <!--column 4-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>參、師者，所以傳道、授業、破解假訊息也（一）</strong></h2>
+                    <p style="font-size: 16px; margin: 5px;">作者：葉淑芬／臺北市立永春高級中學教師</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">滑世代高中生，成天不離手機，獲得訊息來源多半和網路社群媒體有關，因此，「識讀」的範疇須從文字擴展到新聞、戲劇、電影、廣告、照片、圖畫……，若是以「議題」為導向，更能聚焦於當代現象。當眼見不一定為憑，想要解決大家眼中看見大眾傳播媒體所帶來的弊病，就要協助學生擁有思辨、判讀、解決問題的能力。……<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10545&aid=mlx13vKZ5b53dpIKIcUINhgrav8fXrdoa7OWjolxAqk%3d" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+            <!--column 5-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>肆、師者，所以傳道、授業、破解假訊息也（二）</strong></h2>
+                    <p style="font-size: 16px; margin: 5px;">作者：張翔智／弘道國中教師</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">為了讓孩子易於接受且能有更深刻體悟，我試著課程轉化成遊戲任務，讓孩子們化身正義的使者來突破困難、完成任務，希望能讓課程兼具意義與樂趣。「既然孩子們喜歡故事，那就在遊戲任務中融合故事吧！」，帶著這樣的構想，我又試著在遊戲中融入故事的元素，以簡單的Powerpoint投影片，設計一款RPG遊戲……<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10546&aid=mlx13vKZ5b53dpIKIcUINhgrav8fXrdoa7OWjolxAqk%3d" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+            <!--column 6-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>主題文章：短影音是媒體素養的教學利器！──活潑多元的國外中小學實用影片大補帖</strong></h2>
+                    <p style="font-size: 16px; margin: 5px;">作者：胡元輝／中正大學傳播學系教授、優質新聞發展協會理事長</p>
+                    <p style="font-size: 16px; text-align: center; margin: 5px;"><a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10542" target="_blank"><img style="height: auto; max-width: 100%;" src="https://admin.mlearn.moe.gov.tw/Files/Image/ED/e82cf4d2-b7fd-4966-baa4-c1b3c3f0e2df.png" alt="" /></a></p>
+                    <p style="font-size: 16px; text-align: center; margin: 5px;">圖片來源：FactCheck.org</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">媒體素養怎麼教呢？相信對於有志或正在進行此一教學活動的教師而言，首要之務在於掌握媒體素養的精義與內涵，但接續要面對的問題就是有哪些教學資源可資運用？特別是對影像世代的學生們而言，我們又有那些影音材料可資運用呢？</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">除了這些教師們可以運用的本土教學資源外，其實國外的資源相當豐富，有些是可以系統化運用的影音作品，有些則是可與時事配合的即時性影音材料，如果善為運用，可以豐富教學內容，亦能接軌國際脈動。......<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10542" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+            <!--column 7-->
+            <tr>
+                <td style="border-bottom: 2px solid #0A7389; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+                    <h2 style="font-size: 24px; margin: 5px; color: #0c71c3;"><strong>主題文章：當傳染病遇上假訊息</strong></h2>
+                    <p style="font-size: 16px; margin: 5px;">作者：陳柏頤／媒體素養教育工作者</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">世界衛生組織（World Health Organization, WHO）在疫情爆發之初便發現到了傳染病與大量的假訊息交雜而形成了一種稱之為「資訊傳染病」（infodemic）的現象。</p>
+                    <p style="font-size: 16px; text-align: left; text-indent:50px; margin: 5px;">有鑑於此，國際間各個事實查核機構皆開設新冠肺炎專區嚴陣以待，防堵疫情假訊息的蔓延。同時，在各個事實查核機構的監控之下，這些假訊息的散播模式與敘事（narrative）內容也逐漸浮現出來。......<a href="https://mlearn.moe.gov.tw/TopicArticle/PartData?key=10541" target="_blank">閱讀全文</a></p>
+                </td>
+            </tr>
+
+            <!--footer-->
+            <tr>
+                <td>
+                    <table style="width: 100%; background-color: #0a7389; font-size: 16px;">
+                        <tbody>
+                            <tr>
+                                <td style="padding-left: 10px; padding-right: 10px;"><span style="font-size: 16px; color: white;">媒體素養教育資源網：<a style="color: white;" href="https://mlearn.moe.gov.tw/" target="_blank">https://mlearn.moe.gov.tw/</a>｜ 地址：100臺北市中山南路5號｜服務專線：(05)5378-176｜服務信箱：mlearn@yuntech.edu.tw</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 10px; padding-right: 10px; text-align: center;"><span style="font-size: 16px; color: white;"><a style="color: white;" href="https://admin.mlearn.moe.gov.tw/Files/download/PIMS-B-01-03%E6%95%99%E8%82%B2%E9%83%A8%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8%E5%8F%8A%E9%9A%B1%E7%A7%81%E6%AC%8A%E6%94%BF%E7%AD%96-%E7%B6%B2%E7%AB%99%E4%BD%BF%E7%94%A8%E7%89%88_v1.0.odt" target="_blank">【資通安全及隱私權政策】</a>｜【網站資料開放宣告】｜<a style="color: white;" href="https://www.edu.tw/" target="_blank">教育部</a></span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 10px; padding-right: 10px; text-align: center; padding: 0px;"><img src="https://i.imgur.com/IfWNrad.png" alt="" width="50" height="50" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
