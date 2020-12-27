@@ -51,6 +51,19 @@ window.addEventListener("resize",function(){
 
 document.body.appendChild( renderer.domElement );
 
+var brick;
+var loader = new GLTFLoader();
+loader.load('asset/brick.glb',function(model){
+    brick = model;
+    brick.scene.traverse(function(node) {
+        if(node instanceof THREE.Mesh) {
+            node.castShadow = true;
+        }
+    });
+    scene.add(brick.scene);
+    window.brick = brick;
+});
+
 var cylinder;
 var mixer;
 var loader = new GLTFLoader();
