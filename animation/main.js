@@ -181,7 +181,7 @@ window.addEventListener("touchstart",function(e){
 });
 
 window.addEventListener('touchmove', function(e) {
-
+    e.preventDefault();
     if(movingAngle){
         var deltaTouchAngleX, deltaTouchAngleY;
         deltaTouchAngleX = (e.changedTouches[0].clientX - beginTouchAngleX)/ displayWidth*2;
