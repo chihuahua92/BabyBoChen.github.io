@@ -181,18 +181,26 @@ window.addEventListener("touchstart",function(e){
 });
 
 window.addEventListener('touchmove', function(e) {
-    var deltaTouchAngleX, deltaTouchAngleY;
-    deltaTouchAngleX = (e.changedTouches[0].clientX - beginTouchAngleX)/ displayWidth*2;
-    deltaTouchAngleY = (e.changedTouches[0].clientY - beginTouchAngleY)/ displayHeight*2;
-    camera.rotateOnWorldAxis(worldY, deltaTouchAngleX);
-    camera.rotation.deltaWorldY += deltaTouchAngleX;
-    if (Math.abs(radians_to_degrees(camera.rotation.deltaWorldY)) >= 360){
-        if (radians_to_degrees(camera.rotation.deltaWorldY) > 0){
-            camera.rotation.deltaWorldY -= Math.PI * 2;
-        }else if (radians_to_degrees(camera.rotation.deltaWorldY) < 0){
-            camera.rotation.deltaWorldY += Math.PI * 2;
+
+    if(movingAngle){
+        var deltaTouchAngleX, deltaTouchAngleY;
+        deltaTouchAngleX = (e.changedTouches[0].clientX - beginTouchAngleX)/ displayWidth*2;
+        deltaTouchAngleY = (e.changedTouches[0].clientY - beginTouchAngleY)/ displayHeight*2;
+        camera.rotateOnWorldAxis(worldY, deltaTouchAngleX);
+        camera.rotation.deltaWorldY += deltaTouchAngleX;
+        if (Math.abs(radians_to_degrees(camera.rotation.deltaWorldY)) >= 360){
+            if (radians_to_degrees(camera.rotation.deltaWorldY) > 0){
+                camera.rotation.deltaWorldY -= Math.PI * 2;
+            }else if (radians_to_degrees(camera.rotation.deltaWorldY) < 0){
+                camera.rotation.deltaWorldY += Math.PI * 2;
+            }
         }
+        beginTouchAngleX = e.changedTouches[0].clientX;
+        beginTouchAngleY = e.changedTouches[0].clientY;
     }
-    beginTouchAngleX = e.changedTouches[0].clientX;
-    beginTouchAngleY = e.changedTouches[0].clientY;
+});
+
+window.addEventListener("touchend",function(e){
+    movingAngle = false;
+    cylinder.scene.position.z += 1;
 });
