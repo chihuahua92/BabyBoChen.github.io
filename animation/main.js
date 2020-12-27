@@ -60,6 +60,9 @@ loader.load('asset/brick.glb',function(model){
             node.castShadow = true;
         }
     });
+    brick.scene.position.x += 4;
+    brick.scene.position.y += 3;
+    brick.scene.position.z += 2;
     scene.add(brick.scene);
     window.brick = brick;
 });
@@ -95,7 +98,7 @@ loader.load('asset/floor.glb',function(model){
 });
 
 
-var ambientLight = new THREE.AmbientLight('#fff',0.9);
+var ambientLight = new THREE.AmbientLight('#fff',0.5);
 scene.add(ambientLight);
 var pointLight = new THREE.SpotLight("#fff");
 pointLight.castShadow = true;
