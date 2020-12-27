@@ -177,9 +177,10 @@ var beginTouchAngleY;
 window.addEventListener("touchstart",function(e){
     beginTouchAngleX = e.touches[0].clientX;
     beginTouchAngleY = e.touches[0].clientY;
+    movingAngle = true;
 });
 
-window.addEventListener('touchend', function(e) {
+window.addEventListener('touchmove', function(e) {
     var deltaTouchAngleX, deltaTouchAngleY;
     deltaTouchAngleX = (e.changedTouches[0].clientX - beginTouchAngleX)/ displayWidth*2;
     deltaTouchAngleY = (e.changedTouches[0].clientY - beginTouchAngleY)/ displayHeight*2;
@@ -192,6 +193,6 @@ window.addEventListener('touchend', function(e) {
             camera.rotation.deltaWorldY += Math.PI * 2;
         }
     }
-    beginTouchAngleX = null;
-    beginTouchAngleY = null;
+    beginTouchAngleX = e.changedTouches[0].clientX;
+    beginTouchAngleY = e.changedTouches[0].clientY;
 });
