@@ -171,6 +171,27 @@ window.addEventListener("wheel",function(e){
     camera.updateProjectionMatrix();    
 });
 
-window.addEventListener("touchmove",function(e){
-    cylinder.scene.position.x += 1;
+var beginTouchAngleX;
+var beginTouchAngleY;
+
+window.addEventListener("touchstart",function(e){
+    beginTouchAngleX = e.touches[0].clientX;
+    beginTouchAngleY = e.touches[0].clientY;
+});
+
+window.addEventListener('touchend', function(e) {
+    var deltaTouchAngleX, deltaTouchAngleY;
+    deltaTouchAngleX = (e.changedTouches[0].clientX - beginTouchAngleX)/ displayWidth*2;
+    deltaTouchAngleY = (e.changedTouches[0].clientY - beginTouchAngleY)/ displayHeight*2;
+    camera.rotateOnWorldAxis(worldY, deltaTouchAngleX);
+    camera.rotation.deltaWorldY += deltaTouchAngleX;
+    if (Math.abs(radians_to_degrees(camera.rotation.deltaWorldY)) >= 360){
+        if (radians_to_degrees(camera.rotation.deltaWorldY) > 0){
+            camera.rotation.deltaWorldY -= Math.PI * 2;
+        }else if (radians_to_degrees(camera.rotation.deltaWorldY) < 0){
+            camera.rotation.deltaWorldY += Math.PI * 2;
+        }
+    }
+    beginTouchAngleX = null;
+    beginTouchAngleY = null;
 });
