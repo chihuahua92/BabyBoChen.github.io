@@ -196,11 +196,14 @@ window.addEventListener('touchmove', function(e) {
             }
         }
         beginTouchAngleX = e.changedTouches[0].clientX;
+        if (Math.abs(radians_to_degrees(camera.rotation.deltaX + angleY)) <= 60){
+            camera.rotateX(angleY);
+            camera.rotation.deltaX += angleY;
+        }
         beginTouchAngleY = e.changedTouches[0].clientY;
     }
 });
 
 window.addEventListener("touchend",function(e){
     movingAngle = false;
-    cylinder.scene.position.z += 1;
 });
