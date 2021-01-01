@@ -125,7 +125,7 @@ function animate() {
         mixer.update(delta);
     }
     if(body){
-        body.scene.rotateY(degrees_to_radians(-5));
+        body.scene.rotateY(degrees_to_radians(-1));
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
