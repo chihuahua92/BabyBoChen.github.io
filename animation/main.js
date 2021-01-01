@@ -13,7 +13,7 @@ scene.background = new THREE.Color('skyblue');
 
 var camera = new THREE.PerspectiveCamera( 60, 4/3 , 0.1, 1000 );
 camera.position.z = 10;
-camera.position.y = 4;
+camera.position.y = 3;
 camera.rotation.deltaX = 0;
 camera.rotation.deltaWorldY = 0;
 //camera.rotation.deltaZ = 0;
@@ -67,21 +67,22 @@ loader.load('asset/brick.glb',function(model){
     window.brick = brick;
 });
 
-var cylinder;
+var body;
 var mixer;
 var loader = new GLTFLoader();
-loader.load('asset/cylinder.glb',function(model){
-    cylinder = model;
-    cylinder.scene.traverse(function(node) {
+loader.load('asset/mannequin.glb',function(model){
+    body = model;
+    body.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
+            node.receiveShadow = true;
         }
     });
-    mixer = new THREE.AnimationMixer(cylinder.scene);
-    var action = mixer.clipAction(cylinder.animations[0]);
+    mixer = new THREE.AnimationMixer(body.scene);
+    var action = mixer.clipAction(body.animations[0]);
     action.play();
-    scene.add(cylinder.scene);
-    window.cylinder = cylinder;
+    scene.add(body.scene);    
+    window.body = body;
 });
 
 var floor;
@@ -98,7 +99,7 @@ loader.load('asset/floor.glb',function(model){
 });
 
 
-var ambientLight = new THREE.AmbientLight('#fff',0.5);
+var ambientLight = new THREE.AmbientLight('#fff',0.1);
 scene.add(ambientLight);
 var pointLight = new THREE.SpotLight("#fff");
 pointLight.castShadow = true;
@@ -122,6 +123,9 @@ function animate() {
     var delta = clock.getDelta();
     if(mixer){
         mixer.update(delta);
+    }
+    if(body){
+        body.scene.rotateY(degrees_to_radians(-5));
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
