@@ -81,7 +81,10 @@ loader.load('asset/mannequin.glb',function(model){
     mixer = new THREE.AnimationMixer(body.scene);
     var action = mixer.clipAction(body.animations[0]);
     action.play();
-    scene.add(body.scene);    
+    scene.add(body.scene);
+    body.scene.rotateY(degrees_to_radians(90));
+    body.scene.position.z -= 20;
+    
     window.body = body;
 });
 
@@ -108,7 +111,7 @@ pointLight.shadow.mapSize.height = 512;
 pointLight.shadow.camera.near = 0.5;
 pointLight.shadow.camera.far = 30;
 pointLight.position.set(0,15,0);;
-pointLight.target.position.set(0,0,0);
+pointLight.target.position.set(0,0,-20);
 pointLight.distance = 25;
 pointLight.intensity = 2;
 scene.add(pointLight.target);
@@ -125,7 +128,7 @@ function animate() {
         mixer.update(delta);
     }
     if(body){
-        body.scene.rotateY(degrees_to_radians(-1));
+        body.scene.rotateY(degrees_to_radians(-2));
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
