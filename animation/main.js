@@ -61,8 +61,8 @@ loader.load('asset/brick.glb',function(model){
         }
     });
     brick.scene.position.x += 4;
-    brick.scene.position.y += 3;
-    brick.scene.position.z += 2;
+    brick.scene.position.y += 0;
+    brick.scene.position.z -= 2;
     scene.add(brick.scene);
     window.brick = brick;
 });
@@ -82,11 +82,26 @@ loader.load('asset/mannequin.glb',function(model){
     var action = mixer.clipAction(body.animations[0]);
     action.play();
     scene.add(body.scene);
-    body.scene.rotateY(degrees_to_radians(90));
-    body.scene.position.z -= 20;
-    
+    body.scene.rotateY(degrees_to_radians(45));
+    body.scene.position.z -= 10;    
     window.body = body;
 });
+
+var lowPoly;
+var loader = new GLTFLoader();
+loader.load('asset/LowPoly.glb',function(model){
+    lowPoly = model;
+    lowPoly.scene.traverse(function(node) {
+        if(node instanceof THREE.Mesh) {
+            node.castShadow = true;
+            node.receiveShadow = true;
+        }
+    });
+    scene.add(lowPoly.scene);
+    lowPoly.scene.position.x -= 5;
+    window.lowPoly = lowPoly;
+});
+
 
 var floor;
 var loader = new GLTFLoader();
@@ -127,8 +142,8 @@ function animate() {
     if(mixer){
         mixer.update(delta);
     }
-    if(body){
-        body.scene.rotateY(degrees_to_radians(-2));
+    if(lowPoly){
+        lowPoly.scene.rotateY(degrees_to_radians(-2));
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
