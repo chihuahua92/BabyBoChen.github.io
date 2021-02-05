@@ -58,12 +58,26 @@ loader.load('BonnyLowPoly.glb',function(model){
     bonny.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
-            node.receiveShadow = true;
         }
     });
     bonny.scene.position.y += 3;
     scene.add(bonny.scene);
     window.bonny = bonny;
+});
+
+var bonny2;
+var loader = new GLTFLoader();
+loader.load('Bonny2.glb',function(model){
+    bonny2 = model;
+    bonny2.scene.traverse(function(node) {
+        if(node instanceof THREE.Mesh) {
+            node.castShadow = true;
+        }
+    });
+    bonny2.scene.position.y += 3;
+	bonny2.scene.position.x += 5;
+    scene.add(bonny2.scene);
+    window.bonny2 = bonny2;
 });
 
 var floor;
@@ -104,6 +118,10 @@ function animate() {
     if(bonny){
         
         bonny.scene.rotateY(degrees_to_radians(-1))
+    }
+	if(bonny2){
+        
+        bonny2.scene.rotateY(degrees_to_radians(-1))
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
