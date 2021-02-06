@@ -80,6 +80,21 @@ loader.load('Bonny2.glb',function(model){
     window.bonny2 = bonny2;
 });
 
+var bonnyHairStrip;
+var loader = new GLTFLoader();
+loader.load('BonnyHairStrip.glb',function(model){
+    bonnyHairStrip = model;
+    bonnyHairStrip.scene.traverse(function(node) {
+        if(node instanceof THREE.Mesh) {
+            node.castShadow = true;
+        }
+    });
+    bonnyHairStrip.scene.position.y += 3;
+	bonnyHairStrip.scene.position.x -= 5;
+    scene.add(bonnyHairStrip.scene);
+    window.bonnyHairStrip = bonnyHairStrip;
+});
+
 var floor;
 var loader = new GLTFLoader();
 loader.load('floor.glb',function(model){
@@ -122,6 +137,10 @@ function animate() {
 	if(bonny2){
         
         bonny2.scene.rotateY(degrees_to_radians(-1))
+    }
+	if(bonnyHairStrip){
+        
+        bonnyHairStrip.scene.rotateY(degrees_to_radians(-1))
     }
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
