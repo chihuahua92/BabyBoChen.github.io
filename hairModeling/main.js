@@ -12,7 +12,7 @@ var scene = new THREE.Scene();
 scene.background = new THREE.Color('skyblue');
 
 var camera = new THREE.PerspectiveCamera( 60, 4/3 , 0.1, 1000 );
-camera.position.z = 10;
+camera.position.z = 15;
 camera.position.y = 3;
 camera.rotation.deltaX = 0;
 camera.rotation.deltaWorldY = 0;
@@ -51,6 +51,8 @@ window.addEventListener("resize",function(){
 
 document.body.appendChild( renderer.domElement );
 
+var models = [];
+
 var bonny1;
 var loader = new GLTFLoader();
 loader.load('BonnyCurveHair.glb',function(model){
@@ -63,6 +65,7 @@ loader.load('BonnyCurveHair.glb',function(model){
     bonny1.scene.position.y += 3;
     scene.add(bonny1.scene);
     window.bonny1 = bonny1;
+    models.push(bonny1);
 });
 
 var bonny2;
@@ -78,21 +81,7 @@ loader.load('BonnyPolyHair.glb',function(model){
 	bonny2.scene.position.x += 5;
     scene.add(bonny2.scene);
     window.bonny2 = bonny2;
-});
-
-var bonny3;
-var loader = new GLTFLoader();
-loader.load('BonnyHairCard.glb',function(model){
-    bonny3 = model;
-    bonny3.scene.traverse(function(node) {
-        if(node instanceof THREE.Mesh) {
-            node.castShadow = true;
-        }
-    });
-    bonny3.scene.position.y += 3;
-	bonny3.scene.position.x -= 5;
-    scene.add(bonny3.scene);
-    window.bonny3 = bonny3;
+    models.push(bonny2);
 });
 
 var floor;
@@ -130,14 +119,11 @@ var pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
 
 function animate() {
 
-    var models = [bonny1, bonny2, bonny3];
-    
-    if(bonny1 && bonny2 && bonny3){
-        
-        models.forEach(model => {
-            model.scene.rotateY(degrees_to_radians(-1)); 
-        });
-    };
+    models.forEach(model => {
+        if(model){
+            model.scene.rotateY(degrees_to_radians(-1));
+        };        
+    });
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
