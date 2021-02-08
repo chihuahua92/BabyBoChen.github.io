@@ -51,23 +51,23 @@ window.addEventListener("resize",function(){
 
 document.body.appendChild( renderer.domElement );
 
-var bonny;
+var bonny1;
 var loader = new GLTFLoader();
-loader.load('BonnyLowPoly.glb',function(model){
-    bonny = model;
-    bonny.scene.traverse(function(node) {
+loader.load('BonnyCurveHair.glb',function(model){
+    bonny1 = model;
+    bonny1.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
         }
     });
-    bonny.scene.position.y += 3;
-    scene.add(bonny.scene);
-    window.bonny = bonny;
+    bonny1.scene.position.y += 3;
+    scene.add(bonny1.scene);
+    window.bonny1 = bonny1;
 });
 
 var bonny2;
 var loader = new GLTFLoader();
-loader.load('Bonny2.glb',function(model){
+loader.load('BonnyPolyHair.glb',function(model){
     bonny2 = model;
     bonny2.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
@@ -80,19 +80,19 @@ loader.load('Bonny2.glb',function(model){
     window.bonny2 = bonny2;
 });
 
-var bonnyHairStrip;
+var bonny3;
 var loader = new GLTFLoader();
-loader.load('BonnyHairStrip.glb',function(model){
-    bonnyHairStrip = model;
-    bonnyHairStrip.scene.traverse(function(node) {
+loader.load('BonnyHairCard.glb',function(model){
+    bonny3 = model;
+    bonny3.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
         }
     });
-    bonnyHairStrip.scene.position.y += 3;
-	bonnyHairStrip.scene.position.x -= 5;
-    scene.add(bonnyHairStrip.scene);
-    window.bonnyHairStrip = bonnyHairStrip;
+    bonny3.scene.position.y += 3;
+	bonny3.scene.position.x -= 5;
+    scene.add(bonny3.scene);
+    window.bonny3 = bonny3;
 });
 
 var floor;
@@ -129,19 +129,16 @@ var pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
 
 
 function animate() {
+
+    var models = [bonny1, bonny2, bonny3];
     
-    if(bonny){
+    if(bonny1 && bonny2 && bonny3){
         
-        bonny.scene.rotateY(degrees_to_radians(-1))
-    }
-	if(bonny2){
-        
-        bonny2.scene.rotateY(degrees_to_radians(-1))
-    }
-	if(bonnyHairStrip){
-        
-        bonnyHairStrip.scene.rotateY(degrees_to_radians(-1))
-    }
+        models.forEach(model => {
+            model.scene.rotateY(degrees_to_radians(-1)); 
+        });
+    };
+
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
