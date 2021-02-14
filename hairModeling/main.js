@@ -63,6 +63,7 @@ loader.load('BonnyCurveHair.glb',function(model){
         }
     });
     bonny1.scene.position.y += 3;
+	bonny1.scene.position.x -= 5;
     scene.add(bonny1.scene);
     window.bonny1 = bonny1;
     models.push(bonny1);
@@ -70,14 +71,14 @@ loader.load('BonnyCurveHair.glb',function(model){
 
 var bonny2;
 var loader = new GLTFLoader();
-loader.load('BonnyPolyHair.glb',function(model){
+loader.load('BonnyPinkHair.glb',function(model){
     bonny2 = model;
     bonny2.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
         }
     });
-    bonny2.scene.position.y += 3;
+    bonny2.scene.position.y += 5;
 	bonny2.scene.position.x += 5;
     scene.add(bonny2.scene);
     window.bonny2 = bonny2;
