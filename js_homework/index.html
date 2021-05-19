@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Javascript Rules!</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="https://unpkg.com/vue@3.0.0"></script>
+</head>
+
+<body>
+    <div class="wrapper" id="wrapper"></div>
+    <form>
+        <fieldset>
+            <div class="field">
+                <label for="name">姓名：</label>
+                <input type="text" id="name">
+                <p class="hint" id="nameInputHint"></p>
+                <p>(1.不可空白 2.必須全部為中文字 3.至少兩個字以上)</p>
+            </div>
+            <div class="field">
+                <label for="birthdate">生日：</label>
+                <input type="text" id="birthdate">
+                <p class="hint" id="birthdateInputHint"></p>
+                <p>(格式：西元年/月/日 yyyy/[m]m/[d]d)</p>
+            </div>
+            <div class="field">
+                <label for="password">密碼：</label>
+                <input type="password" id="password" maxlength="12">
+                <p class="hint" id="pwdInputHint"></p>
+                <p>(1.不可空白 2.至少6個字元且必須包含英數字、特殊字元* 3.不可以有中文字)</p>
+            </div>
+            <div class="field">
+                <label for="email">Email：</label>
+                <input type="text" id="email">
+                <p class="hint" id="emailInputHint"></p>
+            </div>
+        </fieldset>
+    </form>
+    <div id="starsEval" draggable="false"></div>
+    <div>
+        <p>SlideShow操作說明：</p>
+        <p>一、滑鼠停留於SlideShow即暫停輪播</p>
+        <p>二、點選SlideShow當前的圖片即會進入相關聯之頁面</p>
+        <p>三、下方後退、播放／暫停和前進按鈕皆可點擊</p>
+        <p>四、在沒暫停的狀況下，每張圖停留3秒</p>
+    </div>
+    <div id="slide">
+        <div id="frame" class="frame"></div>
+        <div id="pre" class="arrow" style="left:0px"></div>
+        <div id="next" class="arrow" style="right:0px"></div>
+        <div id="swiper"></div>
+    </div>
+    <div id="slideBtns"><img id="btnPre" src="./Images/btnPre.png"><img id="btnPause" src="./Images/btnPause.png"><img id="btnNext" src="./Images/btnNext.png"></div>
+    <canvas id="viewport"></canvas>
+    <div>
+        <p>月曆操作說明：</p>
+        <p>一、先挑選年和月，即可產生月曆</p>
+        <p>二、點選月曆日期即可編輯備忘，有輸入文字的話便會儲存於localstorage中，該日期在月曆中會變色</p>
+        <p>三、再次點選該日期即可看見備忘內容</p>
+        <p>四、將備忘完全清空一字不留即可刪除該日的localstorage</p>
+    </div>
+    <div id="app" :key="componentKey">
+        <div ref="calender_wrapper">
+            <select ref="year_select" @change="yearSelected($event)"></select><span> 年 </span>
+            <select ref="month_select" @change="monthSelected($event)"></select><span> 月 </span>
+            <select ref="date_select" @change="dateSelected($event)"></select><span> 日 </span>
+            <mview ref="mview" :passin_year="year" :passin_month="month" :passin_date="date" @dc="dayClick($event)" v-if="mready"></mview>
+            <dview ref="dview" :passin_year="year" :passin_month="month" :passin_date="date" @close="closeDview($event)" v-if="toDview"></dview>
+        </div>
+    </div>
+
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/calender.js"></script>
+    <script src="./scripts/test.js"></script>
+</body>
+
+</html>
