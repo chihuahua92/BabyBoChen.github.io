@@ -11,7 +11,7 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 var scene = new THREE.Scene();
 scene.background = new THREE.Color('skyblue');
 
-var camera = new THREE.PerspectiveCamera( 60, 4/3 , 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera( 80, 4/3 , 0.1, 1000 );
 camera.position.z = 15;
 camera.position.y = 3;
 camera.rotation.deltaX = 0;
@@ -63,8 +63,24 @@ loader.load('king_tut_glb.glb',function(model){
         }
     });
     scene.add(kingTut.scene);
+    kingTut.scene.position.x -= 5;
     window.kingTut = kingTut;
     models.push(kingTut);
+});
+
+var nefertiti;
+var loader = new GLTFLoader();
+loader.load('Nefertiti.glb',function(model){
+    nefertiti = model;
+    nefertiti.scene.traverse(function(node) {
+        if(node instanceof THREE.Mesh) {
+            node.castShadow = true;
+        }
+    });
+    scene.add(nefertiti.scene);
+    nefertiti.scene.position.x += 5;
+    window.nefertiti = nefertiti;
+    models.push(nefertiti);
 });
 
 var floor;
