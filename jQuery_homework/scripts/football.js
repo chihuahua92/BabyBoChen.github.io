@@ -1,15 +1,16 @@
 {
     /**@type {HTMLCanvasElement} */
     var viewport = document.getElementById("viewport");
-    var body = document.getElementsByTagName("body")[0];
+    
 
 
     window.addEventListener("load", function (e) {
-        viewport.style.height = body.offsetHeight + "px";
+        viewport.style.width = window.innerwidth + "px";
+        viewport.style.height = window.innerHeight + "px";
     });
-    viewport.style.height = body.offsetHeight + "px";
     window.addEventListener("resize", function (e) {
-        viewport.style.height = body.offsetHeight + "px";
+        viewport.style.width = window.innerwidth + "px";
+        viewport.style.height = window.innerHeight + "px";
     });
 
     class Football extends Image {
@@ -27,7 +28,7 @@
         }
 
         move(step) {
-            if ((this.X + this.naturalWidth + step * this.xDirecttion) > body.offsetWidth) {
+            if ((this.X + this.naturalWidth + step * this.xDirecttion) > viewport.offsetWidth) {
                 this.xDirecttion = -Math.abs(this.xDirecttion);
             }
             else if ((this.X + step * this.xDirecttion) < 0) {
@@ -82,15 +83,15 @@
     football1.angularDirection = 2;
     footballs.push(football1);
     var football2 = new Football();
-    football2.X = body.offsetWidth - football2.naturalWidth;
+    football2.X = viewport.offsetWidth - football2.naturalWidth;
     football2.xDirecttion = 2;
     football2.yDirecttion = 2;
     football2.angularDirection = -1;
     footballs.push(football2);
 
     var mainloop = setInterval(function (e) {
-        ctx.canvas.width = body.offsetWidth;
-        ctx.canvas.height = body.offsetHeight;
+        ctx.canvas.width = viewport.offsetWidth;
+        ctx.canvas.height = viewport.offsetHeight;
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
         footballs.forEach(football => {
