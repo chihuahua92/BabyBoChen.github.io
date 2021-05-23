@@ -20,18 +20,27 @@
                 z-index: -1;
                 
             }
+            #viewport {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: -2;
+            width: 100%;
+        }
         </style>
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
         
     </head>
-    <body oncontextmenu="return false;">
+    <body>
         <div id="instruction">
             <p id="rotation">Left click on the picture to toggle picture resizing animation.</p>
             <p id="rotation">Right click on the picture to toggle rotation animation.</p>
             <p id="fps">fps:0</p>
         </div>
-        <img id="pic" src="./Images/texture.png">
+        <img id="pic" src="./Images/texture.png" oncontextmenu="return false;">
+        <canvas id="viewport"></canvas>
         <script src="scripts/main.js"></script>
+        <script src="scripts/football.js"></script>
 
     </body>
 </html>

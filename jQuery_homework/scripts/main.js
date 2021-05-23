@@ -240,8 +240,8 @@ function grow(){
         rotation += rotationDirection;
         pic.css("transform",`rotate(${rotation}deg)`);
     }
-    window.requestAnimationFrame(grow);
     fps++;
+    window.requestAnimationFrame(grow);
 }
 grow();
 setInterval(function(){
