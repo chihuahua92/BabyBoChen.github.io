@@ -236,6 +236,8 @@ function grow(){
     if (rotating){
         if (rotation >= 360){
             rotation -= 360;                    
+        }else if (rotation <= -360){
+            rotation += 360;
         }
         rotation += rotationDirection;
         pic.css("transform",`rotate(${rotation}deg)`);
