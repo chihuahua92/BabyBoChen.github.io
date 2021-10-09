@@ -32,7 +32,7 @@ function control(e){
                     layers.push(layer);
                 }
                 if (revealed.length == 2){
-                    if (revealed[0].color == revealed[1].color){
+                    if (revealed[0].color == revealed[1].color && revealed[0].rank == revealed[1].rank){
                         revealed[0].matched();
                         revealed[1].matched();
                         revealed = [];

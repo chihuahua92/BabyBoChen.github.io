@@ -1,4 +1,5 @@
 var kingOfSpades = new Card("assets/images/kingOfSpades.png",13,"spade");
+kingOfHearts.setPos(0,0);
 kingOfSpades.setSpeed(10);
 kingOfSpades.setAngular(-10);
 layers.push(kingOfSpades);

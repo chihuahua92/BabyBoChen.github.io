@@ -356,5 +356,29 @@ function spawnCards(){
     kingOfClubs.setSpeed(5);
     kingOfClubs.setAngular(10);
     layers.push(kingOfClubs);
+
+    var aceOfSpades = new Card("assets/images/aceOfSpades.png",1,"spade");
+    aceOfSpades.setPos(250,0);
+    aceOfSpades.setSpeed(10);
+    aceOfSpades.setAngular(-10);
+    layers.push(aceOfSpades);
+
+    var aceOfHearts = new Card("assets/images/aceOfHearts.png",1,"heart");
+    aceOfHearts.setPos(750,0);
+    aceOfHearts.setSpeed(10);
+    aceOfHearts.setAngular(10);
+    layers.push(aceOfHearts);
+
+    var aceOfDiamonds = new Card("assets/images/aceOfDiamonds.png",1,"diamond");
+    aceOfDiamonds.setPos(250,250);
+    aceOfDiamonds.setSpeed(5);
+    aceOfDiamonds.setAngular(-20);
+    layers.push(aceOfDiamonds);
+
+    var aceOfClubs = new Card("assets/images/aceOfClubs.png",1,"club");
+    aceOfClubs.setPos(750,250);
+    aceOfClubs.setSpeed(5);
+    aceOfClubs.setAngular(10);
+    layers.push(aceOfClubs);
 }
 
