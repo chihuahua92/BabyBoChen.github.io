@@ -1,6 +1,7 @@
 import { foodma } from "./foodma.js";
 import { jQueryHomework } from "./jQuery_homework.js";
 import { pairGame } from "./pairGame.js";
+import { srtPlayer } from "./srtPlayer.js";
 import { stockTw } from "./stock_tw.js";
 import { kingTut } from "./kingTut.js";
 import { eren } from "./eren.js";
@@ -24,6 +25,8 @@ function redirect(){
         main.innerHTML = jQueryHomework;
     }else if(targetPath == "pairGame"){
         main.innerHTML = pairGame;
+    }else if(targetPath == "srtPlayer"){
+        main.innerHTML = srtPlayer;
     }else if(targetPath == "stock_tw"){
         main.innerHTML = stockTw;
     }else if(targetPath == "kingTut"){
