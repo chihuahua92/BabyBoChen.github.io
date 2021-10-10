@@ -1,18 +1,17 @@
-/** @type {HTMLButtonElement} */
-let btnToggleSideBar = null;
-/** @type {HTMLDivElement} */
-let sideBar = null;
-/** @type {CSSStyleDeclaration} */
-let sideBarCSS = null;
-
-let toggle_collapses = [];
-
 window.addEventListener('DOMContentLoaded', function(e){
 
-    btnToggleSideBar = document.getElementById("btnToggleSideBar");
-    sideBar = document.getElementById("sideBar");    
-    sideBarCSS = window.getComputedStyle(sideBar);
-    toggle_collapses = document.querySelectorAll(".toggle-collapse");
+    /** @type {HTMLButtonElement} */
+    let btnToggleSideBar = document.getElementById("btnToggleSideBar");
+    /** @type {HTMLDivElement} */
+    let sideBar = document.getElementById("sideBar");
+    /** @type {CSSStyleDeclaration} */
+    let sideBarCSS = window.getComputedStyle(sideBar);
+    /** @type {NodeList} */
+    let my_links = document.querySelectorAll(".my-link");
+    /** @type {NodeList} */
+    let toggle_collapses = document.querySelectorAll(".toggle-collapse");
+    /** @type {HTMLDivElement} */
+    let main = document.getElementById("main");    
 
     if(localStorage.getItem("sideBar") == "off"){
         sideBar.classList.add('off');
@@ -29,13 +28,28 @@ window.addEventListener('DOMContentLoaded', function(e){
         }
     });
 
-    sideBar.addEventListener('click',function(e){        
+    // sideBar.addEventListener('click',function(e){        
+    //     if(sideBarCSS.getPropertyValue('position') == 'absolute'){
+    //         sideBar.classList.add('off');
+    //         localStorage.setItem("sideBar", "off");
+    //     }
+    // });
+    my_links.forEach(function(link){
+        link.addEventListener("click",function(e){
+            if(sideBarCSS.getPropertyValue('position') == 'absolute'){
+                sideBar.classList.add('off');
+                localStorage.setItem("sideBar", "off");
+            }
+        });        
+    });
+
+    main.addEventListener("click",function(e){
         if(sideBarCSS.getPropertyValue('position') == 'absolute'){
             sideBar.classList.add('off');
             localStorage.setItem("sideBar", "off");
         }
     });
-    
+
     
     toggle_collapses.forEach(/** @param node {HTMLAnchorElement} */function(node){        
         let aria_control_id = node.getAttribute("aria-controls");
