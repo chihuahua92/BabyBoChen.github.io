@@ -1,3 +1,7 @@
+.row{
+    margin: 0px !important;
+}
+
 #flexWrapper {
     display: flex;
     flex-direction: column;
