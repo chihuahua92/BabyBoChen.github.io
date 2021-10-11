@@ -3,8 +3,8 @@ export const foodma = `
 
     <h1 style="text-align:center;">FoodMa福滿商城</h1>
     <h2 style="text-align:center;">資策會智慧應用微軟C#工程師就業養成班MSIT130第四組專題作品</h2>
-    <div>
-        <iframe width="560" height="315" 
+    <div class="video-container">
+        <iframe width="720" height="405" 
         src="https://www.youtube.com/embed/bsoyFUzaHrg" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
