@@ -3,6 +3,9 @@ import {GLTFLoader} from './GLTFLoader.js';
 import {radians_to_degrees} from './mathTool.js'
 import {degrees_to_radians} from './mathTool.js'
 
+let isPlaying = true;
+const toDispose = [];
+
 var renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -60,6 +63,7 @@ loader.load('king_tut_glb.glb',function(model){
     kingTut.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
+            toDispose.push(node);
         }
     });
     scene.add(kingTut.scene);
@@ -75,6 +79,7 @@ loader.load('Nefertiti.glb',function(model){
     nefertiti.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
+            toDispose.push(node);
         }
     });
     scene.add(nefertiti.scene);
@@ -90,6 +95,7 @@ loader.load('floor.glb',function(model){
     floor.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.receiveShadow = true;
+            toDispose.push(node);
         }
     });
     scene.add(floor.scene);
@@ -123,9 +129,12 @@ function animate() {
             model.scene.rotateY(degrees_to_radians(-1));
         };        
     });
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
+    
+    if(isPlaying){        
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+    }
+    
 }
 
 animate();
@@ -223,4 +232,20 @@ window.addEventListener('touchmove', function(e) {
 
 window.addEventListener("touchend",function(e){
     movingAngle = false;
+});
+
+window.addEventListener('beforeunload', function (e) {
+
+    isPlaying = false;
+    toDispose.forEach(mesh => {
+        scene.remove(mesh);
+        mesh.geometry.dispose();
+        mesh.geometry = undefined;
+        if(mesh.material.map){
+            mesh.material.map.dispose();
+        }      
+        mesh.material.dispose();      
+        mesh = undefined;
+    });
+    
 });

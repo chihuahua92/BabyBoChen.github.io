@@ -1,12 +1,16 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import {GLTFLoader} from './GLTFLoader.js';
-import {radians_to_degrees} from './mathTool.js'
-import {degrees_to_radians} from './mathTool.js'
+import {radians_to_degrees} from './mathTool.js';
+import {degrees_to_radians} from './mathTool.js';
+
+let isPlaying = true;
+const toDispose = [];
 
 var renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputEncoding = THREE.sRGBEncoding;
+window.renderer = renderer;
 
 var scene = new THREE.Scene();
 scene.background = new THREE.Color('skyblue');
@@ -60,6 +64,7 @@ loader.load('Eren.glb',function(model){
     Eren.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.castShadow = true;
+            toDispose.push(node);
         }
     });
     scene.add(Eren.scene);
@@ -77,6 +82,7 @@ loader.load('floor.glb',function(model){
     floor.scene.traverse(function(node) {
         if(node instanceof THREE.Mesh) {
             node.receiveShadow = true;
+            toDispose.push(node);
         }
     });
     scene.add(floor.scene);
@@ -112,7 +118,9 @@ function animate() {
     });
 
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
+    if (isPlaying){
+        requestAnimationFrame(animate);
+    }
 }
 
 animate();
@@ -210,4 +218,20 @@ window.addEventListener('touchmove', function(e) {
 
 window.addEventListener("touchend",function(e){
     movingAngle = false;
+});
+
+window.addEventListener('beforeunload', function (e) {
+
+    isPlaying = false;
+    toDispose.forEach(mesh => {
+        scene.remove(mesh);
+        mesh.geometry.dispose();
+        mesh.geometry = undefined;
+        if(mesh.material.map){
+            mesh.material.map.dispose();
+        }      
+        mesh.material.dispose();      
+        mesh = undefined;
+    });
+    
 });
