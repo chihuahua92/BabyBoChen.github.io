@@ -6,6 +6,7 @@ import { stockTw } from "./stock_tw.js";
 import { kingTut } from "./kingTut.js";
 import { eren } from "./eren.js";
 import { haterBoy } from "./haterBoy.js";
+import { srtPlayerFX } from "./srtPlayerFX.js";
 
 
 /** @type {string} */
@@ -29,6 +30,8 @@ function redirect(){
         main.innerHTML = srtPlayer;
     }else if(targetPath == "stock_tw"){
         main.innerHTML = stockTw;
+    }else if(targetPath == "srtPlayerFX"){
+        main.innerHTML = srtPlayerFX;
     }else if(targetPath == "kingTut"){
         main.innerHTML = kingTut;
     }else if(targetPath == "eren"){
