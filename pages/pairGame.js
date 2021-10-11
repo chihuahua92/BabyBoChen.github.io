@@ -10,7 +10,7 @@ export const pairGame = `
 <div class="row">
     <div class="col-sm-6">
         <h2>說明：</h2>
-        <p>以Vanilla JS為遊戲引擎、採用canvas繪圖api實作出的2D網頁小遊戲。遊戲勝利條件為翻出所有相同點數且相同顏色的牌（紅或黑）。</p>
+        <p>以Vanilla JS撰寫遊戲引擎、結合canvas繪圖api實作出的2D網頁小遊戲。遊戲勝利條件為翻出所有相同點數且相同顏色的牌（紅或黑）。</p>
     </div>
     <div class="col-sm-6">
         <h2>連結：</h2>
