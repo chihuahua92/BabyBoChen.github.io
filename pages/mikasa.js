@@ -7,7 +7,7 @@ export const mikasa = `
     <div class="row">
         <div class="col-sm-6">
             <h2>說明：</h2>
-            <p>使用Blender 3D繪圖軟體製作的3D人物模型——進擊的巨人女主：米卡莎．阿卡曼。使用texture painting的技術繪製人物的頭髮以及輪廓線，讓low poly的頭髮能具有層次感，並讓人物更加立體、有漫畫的線條感。（glb檔大小：3.84mb）</p>
+            <p>使用Blender 3D繪圖軟體製作的3D人物模型——進擊的巨人女主：米卡莎．阿卡曼。使用texture painting的技術繪製人物的頭髮以及輪廓線，讓low poly的頭髮能具有層次感，並使人物更加立體、有漫畫的線條感。（glb檔大小：3.84mb）</p>
         </div>
         <div class="col-sm-6">
             <h2>操作說明：</h2>
