@@ -10,7 +10,7 @@ export const mikasa = `
             <p>使用Blender 3D繪圖軟體製作的3D人物模型——進擊的巨人女主：米卡莎．阿卡曼。使用texture painting的技術繪製人物的頭髮以及輪廓線，讓low poly的頭髮能具有層次感，並使人物更加立體、有漫畫的線條感。（glb檔大小：3.84mb）</p>
         </div>
         <div class="col-sm-6">
-            <h2>操作說明：</h2>
+            <h2>靜態網頁操作說明：</h2>
             <ul>
                 <li>在canvas上按下滑鼠左鍵不放即可移動視角。</li>
                 <li>使用滑鼠滾輪可放大或縮小畫面。</li>

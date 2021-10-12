@@ -10,7 +10,7 @@ export const kingTut = `
             <p>使用Blender 3D繪圖軟體所繪製的3D模型——圖坦卡門與他的養母娜夫蒂蒂。另外利用Three js的3D引擎將兩個3D模型嵌入於網頁中。已將兩個模型的材質（texture）各自bake成為一張1024*1024的圖檔以減輕3D繪圖引擎的負擔。（glb檔大小：kingTut 236kb, Nefertiti 948 kb）</p>
         </div>
         <div class="col-sm-6">
-            <h2>操作說明：</h2>
+            <h2>靜態網頁操作說明：</h2>
             <ul>
                 <li>在canvas上按下滑鼠左鍵不放即可移動視角。</li>
                 <li>使用滑鼠滾輪可放大或縮小畫面。</li>
