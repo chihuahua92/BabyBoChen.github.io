@@ -28,7 +28,7 @@ export const pairGame = `
     <div class="col-sm-12">
         <h2>連結：</h2>
         <ul>
-            <li>靜態網頁：<a href="pairGame/" target="_blank">https://babybochen.github.io/pairGame</a></li>
+            <li>開始遊戲：<a href="pairGame/" target="_blank">https://babybochen.github.io/pairGame</a></li>
             <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/pairGame/" target="_blank">https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/pairGame/</a></li>
         </ul>
     </div>
