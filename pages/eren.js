@@ -6,7 +6,7 @@ export const eren = `
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <h2>說明：</h2>
+            <h2>作品簡介：</h2>
             <p>使用Blender 3D繪圖軟體製作的3D人物模型——進擊的巨人男主：艾連．葉卡。利用多層的髮片來疊出人物頭髮的層次感，並將現成的圖檔（背章、胸章）貼合在3D人物模型上。（glb檔大小：825kb）</p>
         </div>
         <div class="col-sm-6">

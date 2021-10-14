@@ -1,5 +1,5 @@
 .row{
-    margin: 0px !important;
+    margin: 0px;
 }
 
 #flexWrapper {
@@ -20,16 +20,6 @@
     background-color: dimgray;
 }
 
-#loginWrapper{
-    display: flex;
-    color: aliceblue;
-    align-items:center;
-}
-
-#loginWrapper a{
-    color:aliceblue;
-    margin-right: 15px;
-}
 
 #btnToggleSideBar {
     outline: none !important;
@@ -58,6 +48,7 @@
         bottom: 0px;
         height: 100%;
         transition: all 0.5s ease-out;
+        z-index:99;
     }
 }
 
@@ -101,3 +92,14 @@ iframe, object, embed {
     max-height: 100%;
 }
 
+.carousel-pic{
+    height:50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-pic img{
+    max-height: 100%;
+    max-width: 100%;
+}

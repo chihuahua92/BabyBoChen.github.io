@@ -7,7 +7,7 @@ export const srtPlayer = `
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <h2>說明：</h2>
+            <h2>簡介：</h2>
             <p>使用PyQt5套件所製作的字幕機，用於播放srt格式的字幕檔案。操作說明請見存放庫中的readme.md。</p>
         </div>
         <div class="col-sm-6">

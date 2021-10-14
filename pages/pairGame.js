@@ -9,8 +9,8 @@ export const pairGame = `
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <h2>說明：</h2>
-        <p>以Vanilla JS撰寫遊戲引擎、結合canvas繪圖api實作出的2D網頁小遊戲。遊戲勝利條件為翻出所有相同點數（Ace或King）且相同顏色（紅或黑）的牌。手機環境請使用Chrome瀏覽器遊玩！</p>
+        <h2>簡介：</h2>
+        <p>以Vanilla JS撰寫遊戲引擎、使用canvas繪圖api實作出的2D網頁小遊戲。遊戲勝利條件為翻出所有相同點數（Ace或King）且相同顏色（紅或黑）的牌。手機環境請使用Chrome瀏覽器遊玩！</p>
     </div>
     <div class="col-sm-6">
         <h2>遊戲規則：</h2>

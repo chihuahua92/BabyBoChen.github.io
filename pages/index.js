@@ -3,11 +3,13 @@ import { jQueryHomework } from "./jQuery_homework.js";
 import { pairGame } from "./pairGame.js";
 import { srtPlayer } from "./srtPlayer.js";
 import { stockTw } from "./stock_tw.js";
+import { srtPlayerFX } from "./srtPlayerFX.js";
 import { kingTut } from "./kingTut.js";
 import { eren } from "./eren.js";
 import { mikasa } from "./mikasa.js";
+import { pwd_manager } from "./pwd_manager.js";
 import { haterBoy } from "./haterBoy.js";
-import { srtPlayerFX } from "./srtPlayerFX.js";
+
 
 
 /** @type {string} */
@@ -39,6 +41,8 @@ function redirect(){
         main.innerHTML = eren;
     }else if(targetPath == "mikasa"){
         main.innerHTML = mikasa;
+    }else if(targetPath == "pwd_manager"){
+        main.innerHTML = pwd_manager;
     }else if(targetPath == "haterBoy"){
         main.innerHTML = haterBoy;
     }

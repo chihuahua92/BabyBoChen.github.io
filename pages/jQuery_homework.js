@@ -7,7 +7,7 @@ export const jQueryHomework = `
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <h2>說明：</h2>
+        <h2>簡介：</h2>
         <p>運用jQuery語法撰寫的網頁輪播牆與圖片旋轉動畫。</p>
     </div>
     <div class="col-sm-6">

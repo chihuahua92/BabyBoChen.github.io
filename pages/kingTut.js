@@ -6,7 +6,7 @@ export const kingTut = `
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <h2>說明：</h2>
+            <h2>作品簡介：</h2>
             <p>使用Blender 3D繪圖軟體所繪製的3D模型——圖坦卡門與他的養母娜夫蒂蒂。另外利用THREEJS的3D引擎將兩個3D模型嵌入於網頁中。已將兩個模型的材質（texture）各自bake成為一張1024*1024的圖檔以減輕3D繪圖引擎的負擔。（glb檔大小：kingTut 236kb, Nefertiti 948 kb）</p>
         </div>
         <div class="col-sm-6">
