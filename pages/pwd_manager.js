@@ -59,7 +59,7 @@ export const pwd_manager = `
         <h2>安裝說明：</h2>
         <ul style="list-style-type: none;">
             <li>系統需求：Andoird ^4.3</li>
-            <li>1. 下載<a href="https://drive.google.com/file/d/1FQTX5v8_u9tSXpJ1jH_XaZ_gWWBO2roi/view?usp=sharing" target="_blank">pwd_manager.apk檔</a></li>
+            <li>1. 下載<a id="downloadApp" href="https://drive.google.com/file/d/1FQTX5v8_u9tSXpJ1jH_XaZ_gWWBO2roi/view?usp=sharing" target="_blank">pwd_manager.apk檔</a></li>
             <li>2. 將apk檔放到手機的Download資料夾</li>
             <li>（3. 開啟允許安裝未知的應用程式）</li>
             <li>4. 於手機上點擊pwd_manager.apk即可安裝</li>
@@ -67,7 +67,7 @@ export const pwd_manager = `
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <h2>注意事項：</h2>
         <ul style="list-style-type: none;">
             <li>1. 為免意外曝露本軟體的程式漏洞，在<a href="https://github.com/BabyBoChen/pwd_manager" target="_blank">GitHub存放庫</a>中僅上傳與UI介面相關的.dart檔。</li>

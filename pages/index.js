@@ -43,6 +43,16 @@ function redirect(){
         main.innerHTML = mikasa;
     }else if(targetPath == "pwd_manager"){
         main.innerHTML = pwd_manager;
+        const downloadApp = document.getElementById("downloadApp");
+        downloadApp.addEventListener("click",function(e){
+            e.preventDefault();
+            let res = confirm("是否確定要下載此app？");
+            if(res){
+                window.open('https://drive.google.com/file/d/1FQTX5v8_u9tSXpJ1jH_XaZ_gWWBO2roi/view?usp=sharing');
+            }else{
+                return;
+            }
+        });
     }else if(targetPath == "haterBoy"){
         main.innerHTML = haterBoy;
     }
@@ -55,4 +65,3 @@ window.addEventListener('DOMContentLoaded', (e) => {
 window.addEventListener('popstate', (e) => {
     redirect();
 });
-
