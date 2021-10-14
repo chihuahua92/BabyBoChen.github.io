@@ -13,7 +13,7 @@ export const jQueryHomework = `
     <div class="col-sm-6">
         <h2>連結：</h2>
         <ul>
-            <li>靜態網頁：<a href="jQuery_homework/" target="_blank">https://babybochen.github.io/jQuery_homework/</a></li>
+            <li>靜態網頁：<a href="jQuery_homework/" target="_blank">jQuery_homework</a></li>
             <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/jQuery_homework" target="_blank">jQuery_homework</a></li>
         </ul>
     </div>

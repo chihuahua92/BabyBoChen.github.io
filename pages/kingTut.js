@@ -22,7 +22,7 @@ export const kingTut = `
             <h2>連結：</h2>
             <ul>
                 <li>模型展示(powered by THREEJS)：<a href="kingTut/" target="_blank">https://babybochen.github.io/kingTut/</a></li>
-                <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/kingTut" target="_blank">https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/kingTut</a></li>
+                <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/kingTut" target="_blank">kingTut</a></li>
             </ul>
         </div>
     </div>

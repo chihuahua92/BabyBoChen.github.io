@@ -53,7 +53,7 @@ export const pwd_manager = `
     <div class="col-lg-6">
         <h2>功能簡介：</h2>
         <p>密碼管理員（pwd_manager）是一套以flutter為開發框架、專為智慧型手機所打造的行動app。該軟體的功用在於讓用戶可以隨身記錄註冊過的各種帳號密碼，並且兼具資料匯入／匯出功能，即使更換手機也可以輕鬆地將資料轉移到新手機上。</p>
-        <p>用戶所記錄的各組帳號密碼皆是儲存在手機local端的記憶空間，不會有任何的資料被上傳到網路上。另一方面，密碼管理員也具有PIN碼驗證機制，防止用戶的手機失竊後也帳密資料也一併遭竊。</p>
+        <p>用戶所記錄的各組帳號密碼皆是儲存在手機local端的記憶空間（localDB），不會有任何的資料被上傳到網路上。另一方面，密碼管理員也具有PIN碼驗證機制，以防用戶的手機失竊後也帳密資料也一併遭竊。</p>
     </div>
     <div class="col-lg-6">
         <h2>安裝說明：</h2>
@@ -70,7 +70,8 @@ export const pwd_manager = `
     <div class="col-lg-6">
         <h2>注意事項：</h2>
         <ul style="list-style-type: none;">
-            
+            <li>1. 為免意外曝露本軟體的程式漏洞，在<a href="https://github.com/BabyBoChen/pwd_manager" target="_blank">GitHub存放庫</a>中僅上傳與UI介面相關的.dart檔。</li>
+            <li>2. 使用密碼管理員而導致個資外洩甚至造成財產損失，作者絕不負擔任何賠償責任！使用前請三思！</li>
         </ul>
     </div>    
 </div>

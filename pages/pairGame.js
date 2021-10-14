@@ -29,7 +29,7 @@ export const pairGame = `
         <h2>連結：</h2>
         <ul>
             <li>開始遊戲：<a href="pairGame/" target="_blank">https://babybochen.github.io/pairGame</a></li>
-            <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/pairGame/" target="_blank">https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/pairGame/</a></li>
+            <li>GitHub存放庫：<a href="https://github.com/BabyBoChen/BabyBoChen.github.io/tree/master/pairGame/" target="_blank">pairGame</a></li>
         </ul>
     </div>
 </div>
