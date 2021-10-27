@@ -39,7 +39,7 @@ export const foodma = `
             <div class="col-lg-12">
                 <h2>作品連結：</h2>
                 <a href="https://119.14.71.47:5000/" target="_blank">FoodMa福滿商城</a>
-                <div>(註：網站host在FoodMa團隊的小編家中，如果電腦他沒開電腦就連不到哦～)</div>
+                <div>(註：網站host在FoodMa團隊的小編家中，如果他沒開電腦就連不到哦～)</div>
             </div>    
         </div>
     </div>
