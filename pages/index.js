@@ -9,6 +9,7 @@ import { eren } from "./eren.js";
 import { mikasa } from "./mikasa.js";
 import { pwd_manager } from "./pwd_manager.js";
 import { haterBoy } from "./haterBoy.js";
+import { razorTodo } from "./razorTodo.js";
 
 
 
@@ -55,6 +56,8 @@ function redirect(){
         });
     }else if(targetPath == "haterBoy"){
         main.innerHTML = haterBoy;
+    }else if(targetPath == "razorTodo"){
+        main.innerHTML = razorTodo;
     }
 }
 
